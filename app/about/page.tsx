@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function Home() {
+export default function About() {
   return (
     <>
       <section className="container">
-        <h1>Welcome to Next.js!</h1>
-        <p>This is the home page.</p>
+        <h1>About Us</h1>
+        <p>Learn more about us!</p>
       </section>
     </>
   );

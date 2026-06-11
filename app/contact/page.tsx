@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function Home() {
+export default function Contact() {
   return (
     <>
       <section className="container">
-        <h1>Welcome to Next.js!</h1>
-        <p>This is the home page.</p>
+        <h1>Contact Us</h1>
+        <p>Get in touch with us!</p>
       </section>
     </>
   );

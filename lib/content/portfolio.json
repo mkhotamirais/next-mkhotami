@@ -1,0 +1,53 @@
+{
+  "menu": [
+    { "label": "Home", "url": "/" },
+    { "label": "About", "url": "/about" },
+    { "label": "Projects", "url": "/projects" },
+    { "label": "Posts", "url": "/posts" },
+    { "label": "Contact", "url": "/contact" },
+    {
+      "label": "Others",
+      "url": "#",
+      "sub_menu": [
+        {
+          "label": "Components",
+          "url": "/components",
+          "sub_menu": [
+            { "label": "Sticky", "url": "/components/sticky" },
+            { "label": "Navbar", "url": "/components/navbar" },
+            { "label": "Accordion", "url": "/components/accordion" },
+            { "label": "Form Inputs", "url": "/components/form-inputs" },
+            { "label": "Typescript", "url": "/components/typescript" }
+          ]
+        },
+        {
+          "label": "Apps",
+          "url": "/apps",
+          "sub_menu": [
+            { "label": "Todos", "url": "/apps/todos" },
+            { "label": "Calculator", "url": "/apps/calculator" },
+            { "label": "Clock", "url": "/apps/clock" },
+            { "label": "Stopwatch", "url": "/apps/stopwatch" },
+            { "label": "Symbol Color", "url": "/apps/symbol-color" }
+          ]
+        },
+        {
+          "label": "Public API",
+          "url": "/public-api",
+          "sub_menu": [
+            { "label": "Dummyjson", "url": "/public-api/dummyjson" },
+            { "label": "JSON Placeholder", "url": "/public-api/jp" },
+            { "label": "Youtube", "url": "/public-api/youtube" },
+            { "label": "Random Anime", "url": "/public-api/random-anime" },
+            { "label": "Random Pokemon", "url": "/public-api/random-pokemon" },
+            { "label": "Random User", "url": "/public-api/random-user" },
+            { "label": "Random Dog", "url": "/public-api/random-dog" },
+            { "label": "Random Cat", "url": "/public-api/random-cat" },
+            { "label": "Random Joke", "url": "/public-api/random-joke" },
+            { "label": "Random Quote", "url": "/public-api/random-quote" }
+          ]
+        }
+      ]
+    }
+  ]
+}

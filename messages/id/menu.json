@@ -1,4 +1,9 @@
 {
+  "menu": {
+    "home": { "label": "Home", "url": "/lang" },
+    "about": { "label": "Tentang", "url": "/lang/about" },
+    "contact": { "label": "Kontak", "url": "/lang/contact" }
+  },
   "HomePage": {
     "title": "Halo dunia!"
   },

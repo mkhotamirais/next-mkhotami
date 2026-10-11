@@ -1,4 +1,9 @@
 {
+  "menu": {
+    "home": { "label": "الرئيسية", "url": "/lang" },
+    "about": { "label": "من نحن", "url": "/lang/about" },
+    "contact": { "label": "اتصل بنا", "url": "/lang/contact" }
+  },
   "HomePage": {
     "title": "مرحبا بالعالم!"
   },

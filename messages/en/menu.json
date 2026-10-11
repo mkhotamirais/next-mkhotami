@@ -1,4 +1,9 @@
 {
+  "menu": {
+    "home": { "label": "Home", "url": "/lang" },
+    "about": { "label": "About", "url": "/lang/about" },
+    "contact": { "label": "Contact", "url": "/lang/contact" }
+  },
   "HomePage": {
     "title": "Hello world!"
   },

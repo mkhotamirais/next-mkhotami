@@ -8,6 +8,8 @@ import { setRequestLocale } from "next-intl/server";
 // import { BASE_URL } from "@/lib/constants";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import Header from "@/components/projects/lang/layouts/Header";
+import Footer from "@/components/projects/main/layout/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,9 +17,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const arabic = Noto_Sans_Arabic({
-  variable: "--font-arabic",
-  subsets: ["arabic"],
+const notoArabic = Noto_Sans_Arabic({
+  variable: "--font-noto-arabic",
+  subsets: ["arabic", "latin"],
   display: "swap",
 });
 
@@ -82,7 +84,7 @@ export default async function RootLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   const dir = locale === "ar" ? "rtl" : "ltr";
-  const fontClass = locale === "ar" ? `${arabic.variable} font-arabic` : `${inter.variable} font-sans`;
+  const fontClass = locale === "ar" ? `${notoArabic.variable} font-noto-arabic` : `${inter.variable} font-sans`;
 
   return (
     <html
@@ -97,7 +99,9 @@ export default async function RootLayout({ children, params }: Props) {
           {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange> */}
           <ThemeProvider attribute="class" defaultTheme="system">
             <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
-            {children}
+            <Header />
+            <div className="container grow">{children}</div>
+            <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

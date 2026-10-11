@@ -1,0 +1,7 @@
+{
+  "menu": [
+    { "label": "Dummyjson", "url": "/public-api/dummyjson" },
+    { "label": "JSON Placeholder", "url": "/public-api/jsonplaceholder" },
+    { "label": "Youtube", "url": "/public-api/youtube" }
+  ]
+}

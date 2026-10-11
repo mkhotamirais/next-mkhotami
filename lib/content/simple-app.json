@@ -1,0 +1,9 @@
+{
+  "menu": [
+    { "label": "Todos", "url": "/simple-apps/todos" },
+    { "label": "Calculator", "url": "/simple-apps/calculator" },
+    { "label": "Clock", "url": "/simple-apps/clock" },
+    { "label": "Stopwatch", "url": "/simple-apps/stopwatch" },
+    { "label": "Symbol Color", "url": "/simple-apps/symbol-color" }
+  ]
+}

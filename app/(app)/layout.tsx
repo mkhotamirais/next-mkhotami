@@ -4,6 +4,7 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
+import Footer from "@/components/projects/main/layout/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,6 +35,7 @@ export default async function MainLayout({ children }: Props) {
           <TooltipProvider>
             <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
             {children}
+            <Footer container="container-sm" />
           </TooltipProvider>
         </ThemeProvider>
       </body>

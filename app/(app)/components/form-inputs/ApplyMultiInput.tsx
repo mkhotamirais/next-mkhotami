@@ -1,0 +1,14 @@
+"use client";
+
+import MultiInput from "@/components/ui/custom/MultiInput";
+import React, { useState } from "react";
+
+export default function ApplyMultiInput() {
+  const [tags, setTags] = useState<string[]>([]);
+
+  return (
+    <>
+      <MultiInput value={tags} onChange={setTags} placeholder="Contoh: Ayam, Kucing" />
+    </>
+  );
+}

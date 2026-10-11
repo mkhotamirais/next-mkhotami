@@ -5,10 +5,20 @@ export const routing = defineRouting({
   defaultLocale: "id",
   pathnames: {
     // "/": "/",
-    "/lang": "/lang",
+    "/lang": {
+      en: "/lang",
+      id: "/lang",
+      ar: "/لغة",
+    },
     "/lang/about": {
       en: "/lang/about",
       id: "/lang/tentang",
+      ar: "/لغة/حول",
+    },
+    "/lang/contact": {
+      en: "/lang/contact",
+      id: "/lang/kontak",
+      ar: "/لغة/اتصل-بنا",
     },
     // "/project": {
     //   en: "/project",

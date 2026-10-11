@@ -1,0 +1,9 @@
+{
+  "menu": [
+    { "label": "Sticky", "url": "/components/sticky" },
+    { "label": "Navbar", "url": "/components/navbar" },
+    { "label": "Accordion", "url": "/components/accordion" },
+    { "label": "Form Inputs", "url": "/components/form-inputs" },
+    { "label": "Typescript", "url": "/components/typescript" }
+  ]
+}

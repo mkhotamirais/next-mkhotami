@@ -92,5 +92,7 @@ export const proxy = auth(async (req) => {
 });
 
 export const config = {
-  matcher: ["/en/:path*", "/id/:path*", "/ar/:path*", "/supabase/:path*", "/shop/:path*"],
+  // matcher: ["/en/:path*", "/id/:path*", "/ar/:path*", "/supabase/:path*", "/shop/:path*"],
+  // matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+  matcher: ["/", "/(id|en|ar)/:path*"],
 };

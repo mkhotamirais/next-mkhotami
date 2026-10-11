@@ -2,6 +2,7 @@
   "menu": [
     { "label": "Components", "url": "/components" },
     { "label": "Simple Apps", "url": "/simple-apps" },
-    { "label": "Public Api", "url": "/public-api" }
+    { "label": "Public Api", "url": "/public-api" },
+    { "label": "Lang", "url": "/en/lang" }
   ]
 }

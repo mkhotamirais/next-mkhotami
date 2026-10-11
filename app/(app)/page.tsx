@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import c from "@/lib/content/main.json";
-import Footer from "@/components/projects/main/layout/Footer";
 import Header from "@/components/projects/main/layout/Header";
 
 const menu = c.menu;
@@ -13,7 +12,7 @@ export default function MainHome() {
   return (
     <>
       <Header />
-      <section className="container-sm space-y-6 h-screen flex-1">
+      <section className="container-sm space-y-6 py-8 h-screen flex-1">
         <div className="flex justify-center text-center flex-col items-center py-4 space-y-4">
           <Image
             src="/images/profile-mkhotami-tengah-square.jpg"
@@ -37,7 +36,7 @@ export default function MainHome() {
             <h2 className="h2 text-center">Checkout my portfolio</h2>
             <Separator className={"max-w-24 mx-auto bg-black min-h-0.5 rounded"} />
           </div>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {menu.map((item, i) => (
               <Link href={item.url} key={i} className={buttonVariants({ variant: "secondary" })}>
                 {item.label}
@@ -46,7 +45,6 @@ export default function MainHome() {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

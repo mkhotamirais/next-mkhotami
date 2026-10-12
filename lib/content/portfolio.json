@@ -1,13 +1,13 @@
 {
   "menu": [
-    { "label": "Home", "url": "/" },
-    { "label": "About", "url": "/about" },
-    { "label": "Projects", "url": "/projects" },
-    { "label": "Posts", "url": "/posts" },
-    { "label": "Contact", "url": "/contact" },
+    { "label": "Home", "url": "/portfolio/" },
+    { "label": "About", "url": "/portfolio/about" },
+    { "label": "Projects", "url": "/portfolio/projects" },
+    { "label": "Posts", "url": "/portfolio/posts" },
+    { "label": "Contact", "url": "/portfolio/contact" },
     {
       "label": "Others",
-      "url": "#",
+      "url": "/components",
       "sub_menu": [
         {
           "label": "Components",
@@ -37,17 +37,70 @@
           "sub_menu": [
             { "label": "Dummyjson", "url": "/public-api/dummyjson" },
             { "label": "JSON Placeholder", "url": "/public-api/jp" },
-            { "label": "Youtube", "url": "/public-api/youtube" },
-            { "label": "Random Anime", "url": "/public-api/random-anime" },
-            { "label": "Random Pokemon", "url": "/public-api/random-pokemon" },
-            { "label": "Random User", "url": "/public-api/random-user" },
-            { "label": "Random Dog", "url": "/public-api/random-dog" },
-            { "label": "Random Cat", "url": "/public-api/random-cat" },
-            { "label": "Random Joke", "url": "/public-api/random-joke" },
-            { "label": "Random Quote", "url": "/public-api/random-quote" }
+            { "label": "Youtube", "url": "/public-api/youtube" }
           ]
         }
       ]
     }
-  ]
+  ],
+  "home": {
+    "cvDownloadPdf": "https://docs.google.com/document/d/18R2NTNaj5GlKRRw_xSlzLVVWltXp4V6p3-f9dNR8aHY/export?format=pdf",
+    "cvPreview": "https://docs.google.com/document/d/18R2NTNaj5GlKRRw_xSlzLVVWltXp4V6p3-f9dNR8aHY/preview",
+    "experiences": [
+      {
+        "job": "Freelance Web Developer",
+        "company": "Mkhotami",
+        "date": "Tangerang, 2024 - Now",
+        "description": "I build custom websites that help clients—from schools to travel agencies—establish a strong online presence. I handle everything from design to deployment, delivering responsive and user-friendly web solutions tailored to their goals."
+      },
+      {
+        "job": "ReactJs and NodeJs (Online Bootcamp)",
+        "company": "Eduwork.id",
+        "date": "Jogjakarta, 2023 - 2024",
+        "description": "Completed an intensive 5-month bootcamp focused on full-stack development using React.js and Node.js. Gained hands-on experience through real projects, including building a complete e-commerce site, preparing me for real-world work environments."
+      },
+      {
+        "job": "Ultimate Microsoft Office (Pre-Recorded Videos)",
+        "company": "Udemy",
+        "date": "Bandung, 2021-2022",
+        "description": "Completed a comprehensive course on Microsoft Word and Excel, mastering both fundamental and advanced features for efficient document and data handling."
+      }
+    ]
+  },
+  "about": {
+    "title": "About Me",
+    "sub_1": {
+      "title": "Introduction",
+      "p": "Hi, I’m Khotami, a full-stack web developer with strong experience in building websites using Next.js, Laravel, and WordPress. I focus on creating clean, fast, and user-friendly web applications."
+    },
+    "sub_2": {
+      "title": "Background",
+      "p": "I graduated from UIN Jakarta with a degree in Arabic Literature. While the field wasn’t my true interest, I completed it with responsibility and discipline. | After college, I explored several career paths — from teaching Arabic to trying roles in accounting and data analysis. But through that journey, I realized what I really needed was to commit to one skill and focus. | That’s when I discovered web development. With a proper laptop in hand, I began learning from scratch — starting with HTML, CSS, and JavaScript, then moving into Laravel, and eventually React and Next.js."
+    },
+    "sub_3": {
+      "title": "Skills & Tech Stack",
+      "p": "Over time, I’ve built real-world projects and mastered tools like:",
+      "list": "<strong>Frontend</strong>: Next.js, React, Vue, Tailwind CSS, Motion<br/><strong>Backend</strong>: Laravel, RESTful APIs, MySQL, MongoDB, PostgreSQL<br/><strong>CMS</strong>: WordPress (Elementor, Gutenberg, custom themes/plugins)<br/>Familiar with Git, GitHub, hosting platform like Hostinger, deployment platforms like Vercel"
+    },
+    "sub_4": {
+      "title": "Work Values",
+      "list": "Writing clean and efficient code | Understanding the user’s needs | Learning continuously and adapting to challenges z| Being reliable and committed in any team I join"
+    },
+    "sub_5": {
+      "title": "My Goal",
+      "p": "My goal is to grow as a developer who not only builds websites that work, but also makes them fast, accessible, and enjoyable to use. I’m focused on building a long-term career in web development by delivering real value in every project."
+    },
+    "sub_6": {
+      "title": "Personal Touch",
+      "p": "Outside of tech, I enjoy summarizing what I’ve learned, exploring UI animations, and spending time with playing chess and watching korean drama."
+    }
+  },
+  "contact": {
+    "title": "Let’s Work Together",
+    "p": "I am always open to new opportunities and collaborations. Whether you have a project idea, a job offer, or just want to say hi — feel free to reach out.",
+    "mail": { "label": "mkhotamirais@gmail.com", "url": "mailto:mkhotamirais@gmail.com" },
+    "wa": { "label": "+62 877-6660-6133", "url": "https://wa.me/6287766606133" },
+    "github": { "label": "github.com/mkhotamirais", "url": "https://github.com/mkhotamirais" },
+    "linkedin": { "label": "linkedin.com/in/mkhotami-rais", "url": "https://www.linkedin.com/in/mkhotami-rais/" }
+  }
 }

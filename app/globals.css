@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -120,10 +122,10 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 dark:text-muted-foreground;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background;
   }
   html {
     @apply font-sans;
@@ -134,9 +136,6 @@
   a,
   button {
     @apply cursor-pointer;
-  }
-  p {
-    @apply text-gray-600;
   }
 }
 
@@ -154,15 +153,15 @@
   }
 
   .h1 {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold mb-2 capitalize;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold mb-2 capitalize dark:text-white;
   }
 
   .h2 {
-    @apply text-xl sm:text-xl lg:text-2xl font-medium mb-2 capitalize;
+    @apply text-xl sm:text-xl lg:text-2xl font-medium mb-2 capitalize dark:text-white;
   }
 
   .h3 {
-    @apply text-base sm:text-lg lg:text-xl font-medium mb-2;
+    @apply text-base sm:text-lg lg:text-xl font-medium mb-2 dark:text-white;
   }
 
   .text-link {

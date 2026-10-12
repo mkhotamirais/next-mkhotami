@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import type { Menu } from "@/lib/types/main";
 import Logo from "@/components/Logo";
@@ -104,7 +103,7 @@ function Panel({ placement, children }: { placement: keyof typeof PANEL_STYLES; 
 
 /* ---------- component ---------- */
 
-export default function NavDesktop({ menu }: { menu?: Menu[] }) {
+export default function NavDesktopStandard({ menu }: { menu?: Menu[] }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
@@ -135,6 +134,7 @@ export default function NavDesktop({ menu }: { menu?: Menu[] }) {
                 {item.label}
                 {item.sub_menu && (
                   <ChevronDown
+                    size={16}
                     aria-hidden
                     className="transition-transform motion-reduce:transition-none group-focus-within/main:rotate-180 group-hover/main:rotate-180"
                   />
@@ -157,7 +157,13 @@ export default function NavDesktop({ menu }: { menu?: Menu[] }) {
                         )}
                       >
                         {sub.label}
-                        {sub.sub_menu && <ChevronRight aria-hidden />}
+                        {sub.sub_menu && (
+                          <ChevronRight
+                            size={16}
+                            aria-hidden
+                            className="transition-transform motion-reduce:transition-none group-focus-within/sub:rotate-180 group-hover/sub:rotate-180"
+                          />
+                        )}
                       </Link>
 
                       {sub.sub_menu && (
@@ -182,7 +188,6 @@ export default function NavDesktop({ menu }: { menu?: Menu[] }) {
             </div>
           ))}
         </nav>
-        <ThemeToggle />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import React from "react";
 import c from "@/lib/content/components.json";
 import Breadcrumb from "@/components/ui/custom/Breadcrumb";
 import RouteTitle from "@/components/RouteTitle";
+import Footer from "@/components/projects/main/layout/Footer";
 
 const menu = c.menu;
 
@@ -21,6 +22,7 @@ export default function ComponentsLayout({ children }: { children: React.ReactNo
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

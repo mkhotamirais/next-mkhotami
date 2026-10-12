@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Menu } from "@/lib/types/main";
-import Logo from "@/components/Logo";
 
 /* ---------- helpers ---------- */
 
@@ -24,14 +23,30 @@ const linkClass = (extra?: string) =>
 
 // Halaman aktif: cocok persis, atau pathname berada di bawah url tersebut.
 function matchesPath(url: string, pathname: string) {
+  if (!url.startsWith("/")) return false; // url kosong, "#", atau eksternal
   if (url === "/") return pathname === "/";
   return pathname === url || pathname.startsWith(`${url}/`);
 }
 
-// Menu dianggap aktif jika dirinya atau salah satu turunannya aktif.
-function isMenuActive(item: Menu, pathname: string): boolean {
-  if (matchesPath(item.url, pathname)) return true;
-  return item.sub_menu?.some((child) => isMenuActive(child, pathname)) ?? false;
+// Panjang url terpanjang yang cocok pada item ini atau turunannya. -1 = tidak aktif.
+function matchScore(item: Menu, pathname: string): number {
+  const own = matchesPath(item.url, pathname) ? item.url.length : -1;
+  const child = Math.max(-1, ...(item.sub_menu?.map((c) => matchScore(c, pathname)) ?? []));
+  return Math.max(own, child);
+}
+
+// Hanya satu item aktif per level: yang paling spesifik.
+function pickActive(items: Menu[] | undefined, pathname: string): Menu | undefined {
+  let best: Menu | undefined;
+  let bestScore = -1;
+  for (const it of items ?? []) {
+    const score = matchScore(it, pathname);
+    if (score > bestScore) {
+      best = it;
+      bestScore = score;
+    }
+  }
+  return best;
 }
 
 /* ---------- panel dropdown yang sadar tepi layar ---------- */
@@ -107,6 +122,9 @@ export default function NavDesktopStandard({ menu }: { menu?: Menu[] }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
+  // Satu item aktif di level 1: yang paling spesifik cocok dengan halaman ini.
+  const activeMain = pickActive(menu, pathname);
+
   // Setelah pindah halaman lewat klik mouse, link masih fokus sehingga
   // `group-focus-within` menjaga dropdown tetap terbuka. Lepas fokus itu,
   // tapi biarkan fokus keyboard (:focus-visible) agar tidak hilang.
@@ -119,74 +137,75 @@ export default function NavDesktopStandard({ menu }: { menu?: Menu[] }) {
 
   return (
     <div className="hidden h-16 items-center justify-between md:flex">
-      <Logo />
-
       <div className="flex gap-4">
         <nav ref={navRef} aria-label="Menu utama" className="flex gap-1">
-          {menu?.map((item) => (
-            <div key={itemKey(item)} className="group/main relative">
-              <Link
-                href={item.url}
-                aria-current={matchesPath(item.url, pathname) ? "page" : undefined}
-                data-active={isMenuActive(item, pathname)}
-                className={linkClass("group-hover/main:bg-accent group-focus-within/main:bg-accent")}
-              >
-                {item.label}
+          {menu?.map((item) => {
+            const activeSub = pickActive(item.sub_menu, pathname);
+
+            return (
+              <div key={itemKey(item)} className="group/main relative">
+                <Link
+                  href={item.url}
+                  aria-current={item === activeMain && matchesPath(item.url, pathname) ? "page" : undefined}
+                  data-active={item === activeMain}
+                  className={linkClass("group-hover/main:bg-accent group-focus-within/main:bg-accent")}
+                >
+                  {item.label}
+                  {item.sub_menu && (
+                    <ChevronDown
+                      aria-hidden
+                      className="transition-transform motion-reduce:transition-none group-focus-within/main:rotate-180 group-hover/main:rotate-180"
+                    />
+                  )}
+                </Link>
+
                 {item.sub_menu && (
-                  <ChevronDown
-                    size={16}
-                    aria-hidden
-                    className="transition-transform motion-reduce:transition-none group-focus-within/main:rotate-180 group-hover/main:rotate-180"
-                  />
+                  <Panel placement="below">
+                    {item.sub_menu.map((sub) => {
+                      const activeLeaf = pickActive(sub.sub_menu, pathname);
+
+                      return (
+                        <div key={itemKey(sub)} className="group/sub relative">
+                          <Link
+                            href={sub.url}
+                            aria-current={sub === activeSub && matchesPath(sub.url, pathname) ? "page" : undefined}
+                            data-active={sub === activeSub}
+                            className={linkClass(
+                              cn(
+                                "w-full group-hover/sub:bg-accent group-focus-within/sub:bg-accent",
+                                sub.sub_menu ? "justify-between" : "justify-start",
+                              ),
+                            )}
+                          >
+                            {sub.label}
+                            {sub.sub_menu && <ChevronRight aria-hidden />}
+                          </Link>
+
+                          {sub.sub_menu && (
+                            <Panel placement="side">
+                              {sub.sub_menu.map((leaf) => (
+                                <Link
+                                  key={itemKey(leaf)}
+                                  href={leaf.url}
+                                  aria-current={
+                                    leaf === activeLeaf && matchesPath(leaf.url, pathname) ? "page" : undefined
+                                  }
+                                  data-active={leaf === activeLeaf}
+                                  className={linkClass("w-full justify-start")}
+                                >
+                                  {leaf.label}
+                                </Link>
+                              ))}
+                            </Panel>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </Panel>
                 )}
-              </Link>
-
-              {item.sub_menu && (
-                <Panel placement="below">
-                  {item.sub_menu.map((sub) => (
-                    <div key={itemKey(sub)} className="group/sub relative">
-                      <Link
-                        href={sub.url}
-                        aria-current={matchesPath(sub.url, pathname) ? "page" : undefined}
-                        data-active={isMenuActive(sub, pathname)}
-                        className={linkClass(
-                          cn(
-                            "w-full group-hover/sub:bg-accent group-focus-within/sub:bg-accent",
-                            sub.sub_menu ? "justify-between" : "justify-start",
-                          ),
-                        )}
-                      >
-                        {sub.label}
-                        {sub.sub_menu && (
-                          <ChevronRight
-                            size={16}
-                            aria-hidden
-                            className="transition-transform motion-reduce:transition-none group-focus-within/sub:rotate-180 group-hover/sub:rotate-180"
-                          />
-                        )}
-                      </Link>
-
-                      {sub.sub_menu && (
-                        <Panel placement="side">
-                          {sub.sub_menu.map((leaf) => (
-                            <Link
-                              key={itemKey(leaf)}
-                              href={leaf.url}
-                              aria-current={matchesPath(leaf.url, pathname) ? "page" : undefined}
-                              data-active={matchesPath(leaf.url, pathname)}
-                              className={linkClass("w-full justify-start")}
-                            >
-                              {leaf.label}
-                            </Link>
-                          ))}
-                        </Panel>
-                      )}
-                    </div>
-                  ))}
-                </Panel>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </nav>
       </div>
     </div>

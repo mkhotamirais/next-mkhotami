@@ -1,6 +1,6 @@
 {
   "menu": [
-    { "label": "Home", "url": "/portfolio/" },
+    { "label": "Home", "url": "/portfolio" },
     { "label": "About", "url": "/portfolio/about" },
     { "label": "Projects", "url": "/portfolio/projects" },
     { "label": "Posts", "url": "/portfolio/posts" },
@@ -24,11 +24,11 @@
           "label": "Apps",
           "url": "/apps",
           "sub_menu": [
-            { "label": "Todos", "url": "/apps/todos" },
-            { "label": "Calculator", "url": "/apps/calculator" },
-            { "label": "Clock", "url": "/apps/clock" },
-            { "label": "Stopwatch", "url": "/apps/stopwatch" },
-            { "label": "Symbol Color", "url": "/apps/symbol-color" }
+            { "label": "Todos", "url": "/simple-apps/apps/todos" },
+            { "label": "Calculator", "url": "/simple-apps/apps/calculator" },
+            { "label": "Clock", "url": "/simple-apps/apps/clock" },
+            { "label": "Stopwatch", "url": "/simple-apps/apps/stopwatch" },
+            { "label": "Symbol Color", "url": "/simple-apps/apps/symbol-color" }
           ]
         },
         {

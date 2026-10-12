@@ -24,7 +24,7 @@ export default function Hero() {
               I’m a fullstack web developer with expertise in
               <span className="text-primary font-medium"> Next.js, Laravel, and WordPress. </span>I currently work as a
               freelance web developer, helping businesses build modern and scalable websites.{" "}
-              <Link href="/about" className="underline text-primary">
+              <Link href="/portfolio/about" className="underline text-primary">
                 More about me
               </Link>
             </p>

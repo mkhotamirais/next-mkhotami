@@ -74,9 +74,33 @@ function MobileMenuList({ items, onNavigate }: { items: Menu[]; onNavigate: () =
   );
 }
 
+/* --------------------------------- Auth ------------------------------------ */
+
+// Item terakhir jadi tombol utama (terisi), sisanya outline.
+// Sama dengan aturan di versi desktop.
+function MobileAuthButtons({ items, onNavigate }: { items: Menu[]; onNavigate: () => void }) {
+  return (
+    <div className={cn("mt-2 grid gap-2 border-t px-2 pt-3", items.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
+      {items.map((item, i) => (
+        <Link
+          key={`${item.label}-${item.url}`}
+          href={item.url}
+          onClick={onNavigate}
+          className={buttonVariants({
+            variant: i === items.length - 1 ? "default" : "outline",
+            className: "w-full",
+          })}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 /* --------------------------------- Content --------------------------------- */
 
-export function NavMobileTopPushContent({ menu }: { menu: Menu[] }) {
+export function NavMobileTopPushContent({ menu, authMenu }: { menu: Menu[]; authMenu?: Menu[] }) {
   const open = useNavMobileTopPush((s) => s.open);
   const close = useNavMobileTopPush((s) => s.close);
   const pathname = usePathname();
@@ -119,9 +143,18 @@ export function NavMobileTopPushContent({ menu }: { menu: Menu[] }) {
       )}
     >
       <div className="overflow-hidden">
-        <nav aria-label="Menu utama" className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t p-2">
-          {menu && <MobileMenuList items={menu} onNavigate={close} />}
-        </nav>
+        {/* satu area scroll untuk menu + tombol auth */}
+        <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t p-2">
+          <nav aria-label="Menu utama">
+            <MobileMenuList items={menu} onNavigate={close} />
+          </nav>
+
+          {authMenu && authMenu.length > 0 && (
+            <nav aria-label="Akun">
+              <MobileAuthButtons items={authMenu} onNavigate={close} />
+            </nav>
+          )}
+        </div>
       </div>
     </div>
   );

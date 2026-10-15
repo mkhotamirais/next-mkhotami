@@ -21,6 +21,7 @@ export default function MainHome() {
             width={100}
             height={100}
             className="rounded-full size-24 object-cover object-center mb-4"
+            priority
           />
           <div>
             <h1 className="text-3xl font-semibold mb-2">Mkhotami</h1>
@@ -35,7 +36,7 @@ export default function MainHome() {
         <div>
           <div className="mb-6">
             <h2 className="h2 text-center">Checkout my portfolio</h2>
-            <Separator className={"max-w-24 mx-auto bg-black min-h-0.5 rounded"} />
+            <Separator className={"max-w-24 mx-auto bg-black dark:bg-white min-h-0.5 rounded"} />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {menu.map((item, i) => (

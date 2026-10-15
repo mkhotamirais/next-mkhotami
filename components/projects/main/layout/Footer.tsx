@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Footer({ container = "container" }: { container?: string }) {
   return (
-    <footer className="pb-4 pt-8 border-t">
+    <footer className="pb-4 pt-8 border-t bg-zinc-950">
       <div className={`${container}`}>
         <div className="flex items-center justify-between mb-8">
           <Logo />

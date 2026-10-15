@@ -21,6 +21,16 @@ const linkClass = (extra?: string) =>
     extra,
   );
 
+// Tombol auth: item terakhir jadi tombol utama (terisi), sisanya outline.
+const authClass = (primary: boolean) =>
+  cn(
+    "inline-flex h-9 items-center rounded-lg px-3 text-sm font-medium transition-colors",
+    "outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    primary
+      ? "bg-primary text-primary-foreground hover:bg-primary/90 data-[active=true]:bg-primary/90"
+      : "border hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent",
+  );
+
 // Halaman aktif: cocok persis, atau pathname berada di bawah url tersebut.
 function matchesPath(url: string, pathname: string) {
   if (!url.startsWith("/")) return false; // url kosong, "#", atau eksternal
@@ -35,7 +45,7 @@ function matchScore(item: Menu, pathname: string): number {
   return Math.max(own, child);
 }
 
-// Hanya satu item aktif per level: yang paling spesifik.
+// Hanya satu item aktif per daftar: yang paling spesifik.
 function pickActive(items: Menu[] | undefined, pathname: string): Menu | undefined {
   let best: Menu | undefined;
   let bestScore = -1;
@@ -118,12 +128,12 @@ function Panel({ placement, children }: { placement: keyof typeof PANEL_STYLES; 
 
 /* ---------- component ---------- */
 
-export default function NavDesktopStandard({ menu }: { menu?: Menu[] }) {
+export default function NavDesktopStandard({ menu, authMenu }: { menu?: Menu[]; authMenu?: Menu[] }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
-  // Satu item aktif di level 1: yang paling spesifik cocok dengan halaman ini.
-  const activeMain = pickActive(menu, pathname);
+  // Satu item aktif di SELURUH navigasi (menu utama + auth), bukan per grup.
+  const activeTop = pickActive([...(menu ?? []), ...(authMenu ?? [])], pathname);
 
   // Setelah pindah halaman lewat klik mouse, link masih fokus sehingga
   // `group-focus-within` menjaga dropdown tetap terbuka. Lepas fokus itu,
@@ -137,7 +147,7 @@ export default function NavDesktopStandard({ menu }: { menu?: Menu[] }) {
 
   return (
     <div className="hidden h-16 items-center justify-between md:flex">
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <nav ref={navRef} aria-label="Menu utama" className="flex gap-1">
           {menu?.map((item) => {
             const activeSub = pickActive(item.sub_menu, pathname);
@@ -146,8 +156,8 @@ export default function NavDesktopStandard({ menu }: { menu?: Menu[] }) {
               <div key={itemKey(item)} className="group/main relative">
                 <Link
                   href={item.url}
-                  aria-current={item === activeMain && matchesPath(item.url, pathname) ? "page" : undefined}
-                  data-active={item === activeMain}
+                  aria-current={item === activeTop && matchesPath(item.url, pathname) ? "page" : undefined}
+                  data-active={item === activeTop}
                   className={linkClass("group-hover/main:bg-accent group-focus-within/main:bg-accent")}
                 >
                   {item.label}
@@ -207,6 +217,22 @@ export default function NavDesktopStandard({ menu }: { menu?: Menu[] }) {
             );
           })}
         </nav>
+
+        {authMenu && authMenu.length > 0 && (
+          <nav aria-label="Akun" className="flex items-center gap-2">
+            {authMenu.map((item, i) => (
+              <Link
+                key={itemKey(item)}
+                href={item.url}
+                aria-current={item === activeTop && matchesPath(item.url, pathname) ? "page" : undefined}
+                data-active={item === activeTop}
+                className={authClass(i === authMenu.length - 1)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        )}
       </div>
     </div>
   );

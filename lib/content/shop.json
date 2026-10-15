@@ -1,0 +1,7 @@
+{
+  "menu": [
+    { "label": "Home", "url": "/shop" },
+    { "label": "About", "url": "/shop/about" },
+    { "label": "Contact", "url": "/shop/contact" }
+  ]
+}

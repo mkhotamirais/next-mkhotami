@@ -1,7 +1,8 @@
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
-import Credentials from "next-auth/providers/credentials";
-import { CredentialsSignin, type NextAuthConfig } from "next-auth";
+// import Credentials from "next-auth/providers/credentials";
+// import { CredentialsSignin, type NextAuthConfig } from "next-auth";
+import { type NextAuthConfig } from "next-auth";
 import prisma from "./lib/prisma";
 // import { compareSync } from "bcrypt-ts";
 
@@ -16,33 +17,34 @@ export default {
   providers: [
     Google({ allowDangerousEmailAccountLinking: true }),
     GitHub({ allowDangerousEmailAccountLinking: true }),
-    Credentials({
-      credentials: { email: {}, password: {} },
-      authorize: async (credentials) => {
-        const email = credentials?.email as string | undefined;
-        const password = credentials?.password as string | undefined;
+    // Credentials({
+    //   credentials: { email: {}, password: {} },
+    //   authorize: async (credentials) => {
+    //     const email = credentials?.email as string | undefined;
+    //     const password = credentials?.password as string | undefined;
 
-        if (!email || !password) return null;
-        const normalizedEmail = email.toLowerCase();
+    //     if (!email || !password) return null;
+    //     const normalizedEmail = email.toLowerCase();
 
-        const user = await prisma.user.findUnique({ where: { email: normalizedEmail }, include: { accounts: true } });
-        if (!user) return null;
+    //     const user = await prisma.user.findUnique({ where: { email: normalizedEmail }, include: { accounts: true } });
+    //     if (!user) return null;
 
-        // if (!user.password) {
-        //   const provider = user.accounts[0].provider;
-        //   throw new CustomAuthError(`You have an account with ${provider}. Please sign in with ${provider}`);
-        // }
+    //     // if (!user.password) {
+    //     //   const provider = user.accounts[0].provider;
+    //     //   throw new CustomAuthError(`You have an account with ${provider}. Please sign in with ${provider}`);
+    //     // }
 
-        // const passwordMatch = compareSync(password, user.password);
-        // if (!passwordMatch) return null;
+    //     // const passwordMatch = compareSync(password, user.password);
+    //     // if (!passwordMatch) return null;
 
-        return user;
-      },
-    }),
+    //     return user;
+    //   },
+    // }),
   ],
   pages: { signIn: "/shop/signin" },
   callbacks: {
-    async jwt({ token, user, trigger }) {
+    // async jwt({ token, user, trigger }) {
+    async jwt({ token, user }) {
       if (user) {
         // if (account?.provider !== "credentials" && user.emailVerified === null) {
         //   const updatedUser = await prisma.user.update({
@@ -65,18 +67,18 @@ export default {
         return token;
       }
 
-      if (trigger === "update" || !token.id) {
-        const latestUser = await prisma.user.findUnique({ where: { id: token.id as string } });
-        if (latestUser) {
-          token.id = latestUser.id;
-          token.name = latestUser.name;
-          token.email = latestUser.email;
-          // token.role = latestUser.role;
-          // token.phone = latestUser.phone;
-          // token.pendingEmail = latestUser.pendingEmail;
-          token.emailVerified = latestUser.emailVerified;
-        }
-      }
+      // if (trigger === "update" || !token.id) {
+      //   const latestUser = await prisma.user.findUnique({ where: { id: token.id as string } });
+      //   if (latestUser) {
+      //     token.id = latestUser.id;
+      //     token.name = latestUser.name;
+      //     token.email = latestUser.email;
+      //     // token.role = latestUser.role;
+      //     // token.phone = latestUser.phone;
+      //     // token.pendingEmail = latestUser.pendingEmail;
+      //     token.emailVerified = latestUser.emailVerified;
+      //   }
+      // }
 
       return token;
     },

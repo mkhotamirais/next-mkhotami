@@ -1,7 +1,9 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
 import { NextResponse } from "next/server";
+import NextAuth from "next-auth";
+import authConfig from "./auth.config";
 // import {
 //   // adminRoute,
 //   authRoutes,
@@ -12,6 +14,8 @@ import { NextResponse } from "next/server";
 // } from "./lib/content/shop/menu";
 // import { updateSession as updateSessionSupabase } from "./lib/server/supabase.proxy";
 
+const { auth } = NextAuth({ ...authConfig, session: { strategy: "jwt" } });
+
 const intlMiddleware = createMiddleware(routing);
 
 export const proxy = auth(async (req) => {
@@ -21,16 +25,16 @@ export const proxy = auth(async (req) => {
     return NextResponse.next();
   }
 
-  const user = req.auth?.user;
-  const isLoggedIn = !!req.auth;
+  // const user = req.auth?.user;
+  // const isLoggedIn = !!req.auth;
   //   const role = user?.role;
   //   const isVerifiedEmail = !!user?.emailVerified;
 
   //   const isAuthRoutes = authRoutes.some((route) => pathname.startsWith(route));
   //   const isTransactionRoutes = transactionRoutes.some((route) => pathname.startsWith(route));
   //   const isUserRoute = pathname.startsWith(userRoute);
-  const isBaseUserPage = pathname === "/user";
-  const isProfileArea = pathname.startsWith("/user/profile");
+  // const isBaseUserPage = pathname === "/user";
+  // const isProfileArea = pathname.startsWith("/user/profile");
   //   const isVerifyRoute = pathname.startsWith(verifyRoute);
   //   const isVerifyPendingRoute = pathname.startsWith(verifyPendingRoute);
   // const isDashbardRoute = pathname.startsWith("/shop/dashboard");

@@ -25,6 +25,8 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+    // Sembunyikan warning pola file terlalu luas dari loader WASM Prisma
+    ignoreIssue: [{ path: /loadWasm\.ts$/ }],
   },
   experimental: {
     serverActions: {

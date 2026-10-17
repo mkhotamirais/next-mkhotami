@@ -3,7 +3,6 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import prisma from "@/lib/prisma";
 import authConfig from "./auth.config";
-// import { compareSync } from "bcrypt-ts"; // kalau diaktifkan lagi, import-nya hanya di file ini
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
@@ -26,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
         if (!user) return null;
 
-        // ...logika password kamu (yang sekarang di-comment) tetap di sini
+        // logika password kamu (bcrypt dsb.) taruh di sini, bukan di auth.config.ts
 
         return user;
       },

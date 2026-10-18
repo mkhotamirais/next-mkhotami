@@ -6,7 +6,7 @@ import { useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 
-export function LoginGoogle({ label = "Login With Google" }: { label?: string }) {
+export function SigninGoogle({ label = "Login With Google" }: { label?: string }) {
   const [pending, startTransition] = useTransition();
 
   const handleSignInGoogle = async () => {

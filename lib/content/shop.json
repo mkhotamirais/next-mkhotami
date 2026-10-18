@@ -3,5 +3,13 @@
     { "label": "Home", "url": "/shop" },
     { "label": "About", "url": "/shop/about" },
     { "label": "Contact", "url": "/shop/contact" }
+  ],
+  "auth_menu": [
+    { "label": "Sign In", "url": "/shop/signin" },
+    { "label": "Sign Up", "url": "/shop/signup" }
+  ],
+  "user_menu": [
+    { "label": "Orders", "url": "/shop/orders" },
+    { "label": "Profile", "url": "/shop/profile" }
   ]
 }

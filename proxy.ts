@@ -97,6 +97,19 @@ export const proxy = auth(async (req) => {
 
 export const config = {
   // matcher: ["/en/:path*", "/id/:path*", "/ar/:path*", "/supabase/:path*", "/shop/:path*"],
+  // matcher: ["/", "/(id|en|ar)/:path*"],
   // matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
-  matcher: ["/", "/(id|en|ar)/:path*"],
+  matcher: [
+    /*
+     * Jalankan proxy/middleware pada:
+     * - Halaman utama (/)
+     * - Semua rute multibahasa (cth: /id, /en, /ar, /shop, dll)
+     * KECUALI:
+     * - api (Public API kamu aman dari middleware)
+     * - _next/static, _next/image (file internal Next.js)
+     * - _vercel (file deployment Vercel)
+     * - File ber-ekstensi seperti favicon.ico, .png, .jpg, dll
+     */
+    "/((?!api|_next/static|_next/image|_vercel|.*\\..*).*)",
+  ],
 };

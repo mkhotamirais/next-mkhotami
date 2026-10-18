@@ -18,7 +18,7 @@ import Alert from "@/components/ui/custom/Alert";
 
 type inferSchema = z.infer<typeof loginSchema>;
 
-export default function LoginForm() {
+export default function SigninForm() {
   const [showPass, setShowPass] = useState(false);
   const [alert, setAlert] = useState<{ type: "success" | "error"; message: string | undefined } | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(0);

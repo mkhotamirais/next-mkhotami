@@ -40,7 +40,7 @@ export default function MainHome() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {menu.map((item, i) => (
-              <Link href={item.url} key={i} className={buttonVariants({ variant: "secondary" })}>
+              <Link href={item.url} key={i} className={buttonVariants({ variant: "outline" })}>
                 {item.label}
               </Link>
             ))}

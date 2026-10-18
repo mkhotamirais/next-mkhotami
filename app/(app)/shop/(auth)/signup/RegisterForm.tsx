@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 
 type inferSchema = z.infer<typeof registerSchema>;
 
-export default function RegisterForm() {
+export default function SignupForm() {
   const form = useForm<inferSchema>({
     resolver: zodResolver(registerSchema),
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },

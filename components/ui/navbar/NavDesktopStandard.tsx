@@ -6,20 +6,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Menu } from "@/lib/types/main";
-
-/* ---------- helpers ---------- */
-
-const itemKey = (item: Menu) => `${item.label}-${item.url}`;
-
-// Pengganti buttonVariants: hanya class Tailwind + token tema.
-const linkClass = (extra?: string) =>
-  cn(
-    "inline-flex h-9 items-center gap-1 rounded-lg px-2 text-sm font-medium transition-colors",
-    "hover:bg-accent hover:text-accent-foreground",
-    "outline-none focus-visible:ring-2 focus-visible:ring-ring",
-    "data-[active=true]:bg-accent",
-    extra,
-  );
+import { itemKey, matchesPath, navLinkClass, pickActive } from "@/lib/utils_nav";
 
 // Tombol auth: item terakhir jadi tombol utama (terisi), sisanya outline.
 const authClass = (primary: boolean) =>
@@ -30,34 +17,6 @@ const authClass = (primary: boolean) =>
       ? "bg-primary text-primary-foreground hover:bg-primary/90 data-[active=true]:bg-primary/90"
       : "border hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent",
   );
-
-// Halaman aktif: cocok persis, atau pathname berada di bawah url tersebut.
-function matchesPath(url: string, pathname: string) {
-  if (!url.startsWith("/")) return false; // url kosong, "#", atau eksternal
-  if (url === "/") return pathname === "/";
-  return pathname === url || pathname.startsWith(`${url}/`);
-}
-
-// Panjang url terpanjang yang cocok pada item ini atau turunannya. -1 = tidak aktif.
-function matchScore(item: Menu, pathname: string): number {
-  const own = matchesPath(item.url, pathname) ? item.url.length : -1;
-  const child = Math.max(-1, ...(item.sub_menu?.map((c) => matchScore(c, pathname)) ?? []));
-  return Math.max(own, child);
-}
-
-// Hanya satu item aktif per daftar: yang paling spesifik.
-function pickActive(items: Menu[] | undefined, pathname: string): Menu | undefined {
-  let best: Menu | undefined;
-  let bestScore = -1;
-  for (const it of items ?? []) {
-    const score = matchScore(it, pathname);
-    if (score > bestScore) {
-      best = it;
-      bestScore = score;
-    }
-  }
-  return best;
-}
 
 /* ---------- panel dropdown yang sadar tepi layar ---------- */
 
@@ -128,7 +87,15 @@ function Panel({ placement, children }: { placement: keyof typeof PANEL_STYLES; 
 
 /* ---------- component ---------- */
 
-export default function NavDesktopStandard({ menu, authMenu }: { menu?: Menu[]; authMenu?: Menu[] }) {
+type Props = {
+  menu?: Menu[];
+  /** Tombol untuk tamu (Login, Daftar). */
+  authMenu?: Menu[];
+  /** Slot di sisi kanan, mis. menu profil. Opsional. */
+  children?: ReactNode;
+};
+
+export default function NavDesktopStandard({ menu, authMenu, children }: Props) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
@@ -158,7 +125,7 @@ export default function NavDesktopStandard({ menu, authMenu }: { menu?: Menu[]; 
                   href={item.url}
                   aria-current={item === activeTop && matchesPath(item.url, pathname) ? "page" : undefined}
                   data-active={item === activeTop}
-                  className={linkClass("group-hover/main:bg-accent group-focus-within/main:bg-accent")}
+                  className={navLinkClass("group-hover/main:bg-accent group-focus-within/main:bg-accent")}
                 >
                   {item.label}
                   {item.sub_menu && (
@@ -180,7 +147,7 @@ export default function NavDesktopStandard({ menu, authMenu }: { menu?: Menu[]; 
                             href={sub.url}
                             aria-current={sub === activeSub && matchesPath(sub.url, pathname) ? "page" : undefined}
                             data-active={sub === activeSub}
-                            className={linkClass(
+                            className={navLinkClass(
                               cn(
                                 "w-full group-hover/sub:bg-accent group-focus-within/sub:bg-accent",
                                 sub.sub_menu ? "justify-between" : "justify-start",
@@ -201,7 +168,7 @@ export default function NavDesktopStandard({ menu, authMenu }: { menu?: Menu[]; 
                                     leaf === activeLeaf && matchesPath(leaf.url, pathname) ? "page" : undefined
                                   }
                                   data-active={leaf === activeLeaf}
-                                  className={linkClass("w-full justify-start")}
+                                  className={navLinkClass("w-full justify-start")}
                                 >
                                   {leaf.label}
                                 </Link>
@@ -233,6 +200,8 @@ export default function NavDesktopStandard({ menu, authMenu }: { menu?: Menu[]; 
             ))}
           </nav>
         )}
+
+        {children}
       </div>
     </div>
   );

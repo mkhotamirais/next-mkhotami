@@ -120,6 +120,28 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+html[data-auth="1"] .guest-only {
+  display: none;
+}
+html[data-auth="0"] .user-only {
+  display: none;
+}
+/* .avatar-cached {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--user-image, none);
+  background-size: cover;
+  background-position: center;
+} */
+.avatar-cached::before {
+  content: var(--user-initials, "");
+}
+html[data-avatar="1"] .avatar-generic {
+  display: none;
+}
 @layer base {
   * {
     @apply border-border outline-ring/50 dark:text-muted-foreground;

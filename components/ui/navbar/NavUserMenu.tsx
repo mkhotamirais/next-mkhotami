@@ -15,7 +15,7 @@ export type NavUser = {
 };
 
 // Inisial dari nama (maks. 2 huruf), atau huruf pertama email.
-function initials({ name, email }: NavUser) {
+export function initials({ name, email }: NavUser) {
   const words = name?.trim().split(/\s+/).filter(Boolean) ?? [];
   if (words.length) {
     return words
@@ -27,15 +27,33 @@ function initials({ name, email }: NavUser) {
   return email?.trim()[0]?.toUpperCase() ?? "";
 }
 
+// function Avatar({ user }: { user: NavUser }) {
+//   if (user.image) {
+//     // <img> biasa agar tidak perlu mendaftarkan domain di next.config.
+//     // eslint-disable-next-line @next/next/no-img-element
+//     return <img src={user.image} alt="" referrerPolicy="no-referrer" className="size-full object-cover" />;
+//   }
+
+//   const text = initials(user);
+//   return text ? <span aria-hidden>{text}</span> : <UserIcon aria-hidden className="size-4" />;
+// }
+
 function Avatar({ user }: { user: NavUser }) {
   if (user.image) {
-    // <img> biasa agar tidak perlu mendaftarkan domain di next.config.
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={user.image} alt="" referrerPolicy="no-referrer" className="size-full object-cover" />;
   }
 
   const text = initials(user);
-  return text ? <span aria-hidden>{text}</span> : <UserIcon aria-hidden className="size-4" />;
+  if (text) return <span aria-hidden>{text}</span>;
+
+  // Data user belum datang: pakai cache dari CSS variable, atau icon generik
+  return (
+    <>
+      <UserIcon aria-hidden className="avatar-generic size-4" />
+      <span aria-hidden className="avatar-cached" />
+    </>
+  );
 }
 
 type Props = {
@@ -93,7 +111,7 @@ export default function NavUserMenu({
   const hasIdentity = Boolean(user.name || user.email);
 
   return (
-    <div ref={rootRef} className="relative">
+    <div ref={rootRef} className="relative user-only">
       <button
         ref={triggerRef}
         type="button"
@@ -103,7 +121,7 @@ export default function NavUserMenu({
         data-active={Boolean(activeItem)}
         onClick={() => setOpenedAt(open ? null : pathname)}
         className={cn(
-          "inline-flex size-9 items-center justify-center overflow-hidden rounded-full border bg-accent text-xs font-semibold transition-colors",
+          "relative inline-flex size-9 items-center justify-center overflow-hidden rounded-full border bg-accent text-xs font-semibold transition-colors",
           "outline-none hover:bg-accent/70 focus-visible:ring-2 focus-visible:ring-ring",
           "aria-expanded:bg-accent/70 data-[active=true]:border-primary",
         )}

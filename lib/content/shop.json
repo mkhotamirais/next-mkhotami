@@ -11,5 +11,15 @@
   "user_menu": [
     { "label": "Orders", "url": "/shop/orders" },
     { "label": "Profile", "url": "/shop/profile" }
-  ]
+  ],
+  "routes": {
+    "publicRoutes": ["/shop", "/shop/about", "/shop/contact"],
+    "authRoutes": ["/shop/signin", "/shop/signup"],
+    "userRoutes": ["/shop/cart", "/shop/checkout", "/shop/orders", "/shop/payment"],
+    "adminRoute": "/shop/admin",
+    "profileRoute": "/shop/profile",
+    "userWhiteListRoutes": ["/shop/user", "/shop/user/profile"],
+    "verifyRoute": "/shop/verify-email",
+    "verifyPendingRoute": "/shop/verify-email-request"
+  }
 }

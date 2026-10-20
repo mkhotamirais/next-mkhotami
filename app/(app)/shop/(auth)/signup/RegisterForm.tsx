@@ -29,19 +29,18 @@ export default function SignupForm() {
   const [showConfPass, setShowConfPass] = useState(false);
 
   const onSubmit = async (data: inferSchema) => {
-    const res = await fetch("/api/account/signup", { method: "POST", body: JSON.stringify(data) });
+    const res = await fetch("/shop/api/account/signup", { method: "POST", body: JSON.stringify(data) });
     const result = await res.json();
-    console.log(result);
 
     if (!result.ok) {
       toast.error(result.message);
       return;
     }
-    // toast.success(result.message);
-    // form.reset();
+    toast.success(result.message);
+    form.reset();
 
-    // await signIn("credentials", { email: data.email, password: data.password, redirect: false });
-    // router.refresh();
+    await signIn("credentials", { email: data.email, password: data.password, redirect: false });
+    router.refresh();
   };
 
   return (

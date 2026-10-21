@@ -44,7 +44,13 @@ export default function Header() {
           <NavMobileTopPushBtn />
         </div>
       </div>
-      <NavMobileTopPushContent menu={menu} authMenu={authMenu} />
+      <NavMobileTopPushContent
+        menu={menu}
+        authMenu={authMenu}
+        userMenu={userMenu}
+        user={session?.user ?? EMPTY_USER}
+        onSignOut={handleSignOut}
+      />{" "}
     </header>
   );
 }

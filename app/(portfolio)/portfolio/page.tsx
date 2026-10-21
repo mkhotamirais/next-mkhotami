@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Hero from "@/components/projects/portfolio/sections/Hero";
-import ProjectsSkills from "../portfolio/projects/ProjectsSkills";
+import ProjectsSkills from "./projects/ProjectsSkills";
 import Experiences from "@/components/projects/portfolio/sections/Experiences";
-import Posts from "../portfolio/posts/page";
+import Posts from "@/components/projects/portfolio/sections/Posts";
 
 export default function PortfolioHome() {
   return (

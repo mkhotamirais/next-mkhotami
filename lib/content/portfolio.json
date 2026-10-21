@@ -6,8 +6,8 @@
     { "label": "Posts", "url": "/portfolio/posts" },
     { "label": "Contact", "url": "/portfolio/contact" },
     {
-      "label": "Others",
-      "url": "/components",
+      "label": "Next",
+      "url": "/",
       "sub_menu": [
         {
           "label": "Components",
@@ -24,11 +24,11 @@
           "label": "Apps",
           "url": "/apps",
           "sub_menu": [
-            { "label": "Todos", "url": "/simple-apps/apps/todos" },
-            { "label": "Calculator", "url": "/simple-apps/apps/calculator" },
-            { "label": "Clock", "url": "/simple-apps/apps/clock" },
-            { "label": "Stopwatch", "url": "/simple-apps/apps/stopwatch" },
-            { "label": "Symbol Color", "url": "/simple-apps/apps/symbol-color" }
+            { "label": "Todos", "url": "/simple-apps/todos" },
+            { "label": "Calculator", "url": "/simple-apps/calculator" },
+            { "label": "Clock", "url": "/simple-apps/clock" },
+            { "label": "Stopwatch", "url": "/simple-apps/stopwatch" },
+            { "label": "Symbol Color", "url": "/simple-apps/symbol-color" }
           ]
         },
         {
@@ -39,7 +39,9 @@
             { "label": "JSON Placeholder", "url": "/public-api/jp" },
             { "label": "Youtube", "url": "/public-api/youtube" }
           ]
-        }
+        },
+        { "label": "Portfolio", "url": "/portfolio" },
+        { "label": "Home", "url": "/" }
       ]
     }
   ],

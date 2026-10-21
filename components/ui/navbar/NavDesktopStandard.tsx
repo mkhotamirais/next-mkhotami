@@ -93,9 +93,10 @@ type Props = {
   authMenu?: Menu[];
   /** Slot di sisi kanan, mis. menu profil. Opsional. */
   children?: ReactNode;
+  className?: string;
 };
 
-export default function NavDesktopStandard({ menu, authMenu, children }: Props) {
+export default function NavDesktopStandard({ menu, authMenu, children, className = "hidden md:flex" }: Props) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
@@ -113,7 +114,7 @@ export default function NavDesktopStandard({ menu, authMenu, children }: Props) 
   }, [pathname]);
 
   return (
-    <div className="hidden h-16 items-center justify-between md:flex">
+    <div className={cn("h-16 items-center justify-between", className)}>
       <div className="flex items-center gap-4">
         <nav ref={navRef} aria-label="Menu utama" className="flex gap-1">
           {menu?.map((item) => {
@@ -130,6 +131,7 @@ export default function NavDesktopStandard({ menu, authMenu, children }: Props) 
                   {item.label}
                   {item.sub_menu && (
                     <ChevronDown
+                      size={16}
                       aria-hidden
                       className="transition-transform motion-reduce:transition-none group-focus-within/main:rotate-180 group-hover/main:rotate-180"
                     />
@@ -155,7 +157,7 @@ export default function NavDesktopStandard({ menu, authMenu, children }: Props) 
                             )}
                           >
                             {sub.label}
-                            {sub.sub_menu && <ChevronRight aria-hidden />}
+                            {sub.sub_menu && <ChevronRight size={16} aria-hidden />}
                           </Link>
 
                           {sub.sub_menu && (

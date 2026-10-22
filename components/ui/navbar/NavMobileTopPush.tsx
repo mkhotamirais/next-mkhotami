@@ -326,7 +326,7 @@ export function NavMobileTopPushContent({
       inert={!open}
       className={cn(
         className,
-        "transition-[grid-template-rows,opacity] duration-300 ease-in-out z-30 bg-background md:fixed md:right-0 md:min-h-screen md:top-16 md:bottom-0",
+        "transition-[grid-template-rows,opacity] duration-300 ease-in-out z-30 bg-background md:fixed md:right-0 md:min-h-screen md:top-0 md:bottom-0 ",
         open ? "grid-rows-[1fr] opacity-100 md:w-80" : "grid-rows-[0fr] opacity-0 md:w-0",
       )}
     >

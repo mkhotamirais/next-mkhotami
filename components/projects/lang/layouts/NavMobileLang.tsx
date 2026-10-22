@@ -74,7 +74,7 @@ export function NavMobileLangContent() {
   );
 }
 
-export function NavMobileLangBtn() {
+export function NavMobileLangBtn({ className = "md:hidden" }: { className?: string }) {
   const { toggle, open } = useNavMobileLang();
   return (
     <Button
@@ -86,7 +86,7 @@ export function NavMobileLangBtn() {
       aria-expanded={open}
       aria-controls={PANEL_ID}
       onClick={toggle}
-      className="md:hidden"
+      className={className}
     >
       {open ? <X /> : <MenuIcon />}
     </Button>

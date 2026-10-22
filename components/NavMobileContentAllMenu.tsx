@@ -4,6 +4,6 @@ import { NavMobileTopPushContent } from "./ui/navbar/NavMobileTopPush";
 
 const menu = c.menu;
 
-export default function NavMobileTopPushContentAllMenu() {
-  return <NavMobileTopPushContent menu={menu} className={"grid"} />;
+export default function NavMobileTopPushContentAllMenu({ className = "grid" }: { className?: string }) {
+  return <NavMobileTopPushContent menu={menu} className={className} />;
 }

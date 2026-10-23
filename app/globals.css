@@ -146,9 +146,9 @@ html[data-avatar="1"] .avatar-generic {
   * {
     @apply border-border outline-ring/50 dark:text-muted-foreground;
   }
-  body {
+  /* body {
     @apply bg-background;
-  }
+  } */
   html {
     @apply font-sans;
   }
@@ -158,6 +158,9 @@ html[data-avatar="1"] .avatar-generic {
   a,
   button {
     @apply cursor-pointer;
+  }
+  .body {
+    @apply min-h-full flex flex-col w-full bg-zinc-50 dark:bg-zinc-900;
   }
 }
 

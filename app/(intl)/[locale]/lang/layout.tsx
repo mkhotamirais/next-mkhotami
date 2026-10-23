@@ -9,7 +9,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Header from "@/components/projects/lang/layouts/Header";
-import Footer from "@/components/projects/main/layout/Footer";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -94,13 +94,13 @@ export default async function RootLayout({ children, params }: Props) {
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
-      <body className="min-h-full flex flex-col w-full" suppressHydrationWarning>
+      <body className="body" suppressHydrationWarning>
         <NextIntlClientProvider>
           {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange> */}
           <ThemeProvider attribute="class" defaultTheme="system">
             <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
             <Header />
-            <div className="container grow">{children}</div>
+            <div className="container grow my-4">{children}</div>
             <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>

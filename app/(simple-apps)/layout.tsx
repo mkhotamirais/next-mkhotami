@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "sonner";
+import c from "@/lib/content/simple-apps.json";
+import AsideProvider from "@/components/providers/AsideProvider";
+
+const menu = c.menu;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,13 +30,8 @@ export default async function SimpleAppsLayout({ children }: Props) {
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
-      <body className="min-h-full flex flex-col w-full bg-zinc-100 dark:bg-zinc-900" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <TooltipProvider>
-            <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
-            {children}
-          </TooltipProvider>
-        </ThemeProvider>
+      <body className="body" suppressHydrationWarning>
+        <AsideProvider menu={menu}>{children}</AsideProvider>
       </body>
     </html>
   );

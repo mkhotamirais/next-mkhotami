@@ -29,7 +29,7 @@ export default async function MainLayout({ children }: Props) {
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
-      <body className="min-h-full flex flex-col w-full bg-zinc-100 dark:bg-zinc-900" suppressHydrationWarning>
+      <body className="body" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>
             <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />

@@ -1,5 +1,6 @@
 {
   "menu": [
+    { "label": "Home", "url": "/components" },
     { "label": "Sticky", "url": "/components/sticky" },
     { "label": "Navbar", "url": "/components/navbar" },
     { "label": "Accordion", "url": "/components/accordion" },

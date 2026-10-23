@@ -142,22 +142,22 @@ function MobileMenuItem({
 function MobileMenuList({
   items,
   onNavigate,
-  defaultOpen = true,
-  multiple = false,
+  defaultOpen,
+  multiple,
 }: {
   items: Menu[];
   onNavigate: () => void;
   defaultOpen?: boolean;
   multiple?: boolean;
 }) {
-  const [openKeys, setOpenKeys] = useState<string[]>(() =>
-    // defaultOpen ? items.filter((i) => i.sub_menu?.length).map(itemKey) : [],
-    defaultOpen
-      ? items
-          .filter((i) => i.label === "Next")
-          // .slice(0, 1)
-          .map(itemKey)
-      : [],
+  const [openKeys, setOpenKeys] = useState<string[]>(
+    () => (defaultOpen ? items.filter((i) => i.sub_menu?.length).map(itemKey) : []),
+    // defaultOpen
+    //   ? items
+    //       .filter((i) => i.label === "Next")
+    //       // .slice(0, 1)
+    //       .map(itemKey)
+    //   : [],
   );
 
   const toggle = (key: string) =>
@@ -275,6 +275,7 @@ type ContentProps = {
   onSignOut?: () => void | Promise<void>;
   signOutLabel?: string;
   className?: string;
+  defaultOpen?: boolean;
 };
 
 export function NavMobileTopPushContent({
@@ -285,6 +286,7 @@ export function NavMobileTopPushContent({
   onSignOut,
   signOutLabel = "Keluar",
   className = "grid md:hidden",
+  defaultOpen = false,
 }: ContentProps) {
   const open = useNavMobileTopPush((s) => s.open);
   const close = useNavMobileTopPush((s) => s.close);
@@ -326,7 +328,7 @@ export function NavMobileTopPushContent({
       inert={!open}
       className={cn(
         className,
-        "transition-[grid-template-rows,opacity] duration-300 ease-in-out z-30 bg-background md:fixed md:right-0 md:min-h-screen md:top-0 md:bottom-0 ",
+        "transition-[grid-template-rows,opacity] duration-300 ease-in-out z-30 bg-background md:fixed md:right-0 md:min-h-screen md:top-16 md:bottom-0 ",
         open ? "grid-rows-[1fr] opacity-100 md:w-80" : "grid-rows-[0fr] opacity-0 md:w-0",
       )}
     >
@@ -334,7 +336,7 @@ export function NavMobileTopPushContent({
         {/* satu area scroll untuk menu + tombol auth */}
         <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t p-2">
           <nav aria-label="Menu utama">
-            <MobileMenuList items={menu} onNavigate={close} />
+            <MobileMenuList items={menu} onNavigate={close} defaultOpen={defaultOpen} />
           </nav>
 
           {/* Tamu: disembunyikan lewat CSS saat data-auth="1" */}

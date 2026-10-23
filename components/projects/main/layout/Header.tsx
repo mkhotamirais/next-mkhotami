@@ -1,7 +1,9 @@
 import Logo from "@/components/Logo";
-import NavMobileTopPushContentAllMenu from "@/components/NavMobileContentAllMenu";
-import { NavMobileTopPushBtn } from "@/components/ui/navbar/NavMobileTopPush";
+import { NavMobileTopPushBtn, NavMobileTopPushContent } from "@/components/ui/navbar/NavMobileTopPush";
 import React from "react";
+import c from "@/lib/content/portfolio.json";
+
+const menu = c.menu.find((menu) => menu.label === "Next")?.sub_menu;
 
 export default function Header() {
   return (
@@ -11,7 +13,7 @@ export default function Header() {
         <NavMobileTopPushBtn className="flex" />
       </div>
       <div className="container-sm">
-        <NavMobileTopPushContentAllMenu />
+        <NavMobileTopPushContent menu={menu || []} defaultOpen={true} className="grid" />
       </div>
     </header>
   );

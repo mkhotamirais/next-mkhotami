@@ -2,10 +2,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import c from "@/lib/content/main.json";
 import Header from "@/components/projects/main/layout/Header";
-import Footer from "@/components/projects/main/layout/Footer";
+import MainFooter from "@/components/projects/main/layout/MainFooter";
 
 const menu = c.menu;
 
@@ -47,7 +46,7 @@ export default function MainHome() {
           </div>
         </div>
       </section>
-      <Footer container="container-sm" />
+      <MainFooter container="container-sm" />
     </>
   );
 }

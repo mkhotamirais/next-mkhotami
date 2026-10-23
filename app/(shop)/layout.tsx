@@ -4,6 +4,9 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
+import Footer from "@/components/Footer";
+import { NextAuthProviders } from "@/components/providers/NextAuthProvider";
+import Header from "@/components/projects/shop/layouts/Header";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,11 +45,15 @@ export default async function ShopLayout({ children }: Props) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col w-full bg-zinc-100 dark:bg-zinc-900" suppressHydrationWarning>
+      <body className="body" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>
-            <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
-            {children}
+            <NextAuthProviders>
+              <Header />
+              <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </NextAuthProviders>
           </TooltipProvider>
         </ThemeProvider>
       </body>

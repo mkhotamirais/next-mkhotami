@@ -1,5 +1,6 @@
 {
   "menu": [
+    { "label": "Home", "url": "/simple-apps" },
     { "label": "Todos", "url": "/simple-apps/todos" },
     { "label": "Calculator", "url": "/simple-apps/calculator" },
     { "label": "Clock", "url": "/simple-apps/clock" },

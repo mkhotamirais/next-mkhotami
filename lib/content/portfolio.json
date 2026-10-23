@@ -10,6 +10,14 @@
       "url": "/",
       "sub_menu": [
         {
+          "label": "Stack",
+          "url": "/",
+          "sub_menu": [
+            { "label": "Shop", "url": "/shop" },
+            { "label": "Lang", "url": "/en/lang" }
+          ]
+        },
+        {
           "label": "Components",
           "url": "/components",
           "sub_menu": [
@@ -21,7 +29,7 @@
           ]
         },
         {
-          "label": "Apps",
+          "label": "Simple Apps",
           "url": "/apps",
           "sub_menu": [
             { "label": "Todos", "url": "/simple-apps/todos" },
@@ -40,8 +48,15 @@
             { "label": "Youtube", "url": "/public-api/youtube" }
           ]
         },
-        { "label": "Portfolio", "url": "/portfolio" },
-        { "label": "Home", "url": "/" }
+        {
+          "label": "BAAS",
+          "url": "/baas",
+          "sub_menu": [
+            { "label": "Appwrite", "url": "/baas/appwrite" },
+            { "label": "Firebase", "url": "/baas/firebase" },
+            { "label": "Supabase", "url": "/baas/supabase" }
+          ]
+        }
       ]
     }
   ],

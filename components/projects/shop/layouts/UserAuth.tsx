@@ -13,14 +13,9 @@ export default function UserAuth() {
   return (
     <div className="flex items-center gap-2">
       {/* Tidak login */}
-      <div className="auth-guest items-center gap-2">
-        <Link href="/shop/signin" className={cn(buttonVariants({ variant: "default" }))}>
-          Sign in
-        </Link>
-        <Link href="/shop/signup" className={cn(buttonVariants({ variant: "secondary" }))}>
-          Sign up
-        </Link>
-      </div>
+      <Link href="/shop/signin" className={cn(buttonVariants({ variant: "default" }), "auth-guest")}>
+        Sign in
+      </Link>
 
       {/* Login, role user */}
       <div className="auth-user items-center gap-2">
@@ -36,7 +31,7 @@ export default function UserAuth() {
         <Link href="/shop/dashboard" className={cn(buttonVariants({ variant: "default" }))}>
           Dashboard
         </Link>
-        <LogoutButton />
+        {/* <LogoutButton /> */}
       </div>
     </div>
   );

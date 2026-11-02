@@ -1,9 +1,6 @@
-import AsideProvider from "@/components/providers/AsideProvider";
 import React from "react";
-import c from "@/lib/content/shop.json";
-
-const menu = c.admin_menu;
+import ShopProvider from "@/components/projects/shop/ShopProvider";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <AsideProvider menu={menu}>{children}</AsideProvider>;
+  return <ShopProvider>{children}</ShopProvider>;
 }

@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { isActive } from "@/lib/utils_nav";
 import type { Menu } from "@/lib/types/main";
 import { useNavMobileSingleLevel } from "./useNavMobileSingleLevel";
+import { Separator } from "../../separator";
 
 const PANEL_ID = "nav-mobile-single-level";
 // Penanda area "di dalam" nav mobile (tombol + panel). Klik di area ini bukan klik di luar.
@@ -79,7 +80,7 @@ export function NavMobileSingleLevelContent({ menu, rootPath, className }: Conte
       id={PANEL_ID}
       inert={!open}
       className={cn(
-        "grid transition-[grid-template-rows,opacity] duration-300 ease-in-out md:hidden",
+        "container grid transition-[grid-template-rows,opacity] duration-300 ease-in-out md:hidden",
         open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
         className,
       )}
@@ -105,6 +106,10 @@ export function NavMobileSingleLevelContent({ menu, rootPath, className }: Conte
               );
             })}
           </ul>
+          <div>
+            <Separator className="my-2" />
+            <div>halo</div>
+          </div>
         </nav>
       </div>
     </div>

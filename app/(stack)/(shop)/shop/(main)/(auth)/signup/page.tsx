@@ -2,7 +2,7 @@ import React from "react";
 import RegisterForm from "./RegisterForm";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { SigninGoogle } from "../signin/SigninGoogle";
+import { SigninGoogle } from "../signin/SigninOauth";
 
 export default function Register() {
   return (

@@ -17,7 +17,7 @@
     { "label": "Dashboard", "url": "/shop/dashboard" },
     { "label": "Products", "url": "/shop/dashboard/products" },
     { "label": "Products Category", "url": "/shop/dashboard/products-category" },
-    { "label": "Blog", "url": "/shop/dashboard/blog" }
+    { "label": "Post", "url": "/shop/dashboard/post" }
   ],
   "routes": {
     "publicRoutes": ["/shop", "/shop/about", "/shop/contact"],

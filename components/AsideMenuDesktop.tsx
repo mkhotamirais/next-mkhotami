@@ -8,7 +8,13 @@ import { usePathname } from "next/navigation";
 import { Menu } from "@/lib/types/main";
 import Logo from "./Logo";
 
-export default function AsideMenuDesktop({ menu }: { menu: Menu[] }) {
+type Props = {
+  isLogin?: boolean;
+  logoutButton?: React.ReactNode;
+  menu: Menu[];
+};
+
+export default function AsideMenuDesktop({ isLogin = false, logoutButton, menu }: Props) {
   const pathname = usePathname();
 
   const rootPath = pathname.split("/")[1];
@@ -37,6 +43,7 @@ export default function AsideMenuDesktop({ menu }: { menu: Menu[] }) {
               </Link>
             </li>
           ))}
+          {isLogin && <li className="mt-2">{logoutButton}</li>}
         </ul>
       </nav>
     </aside>

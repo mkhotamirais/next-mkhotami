@@ -12,11 +12,18 @@
     { "label": "Orders", "url": "/shop/orders" },
     { "label": "Profile", "url": "/shop/profile" }
   ],
+  "admin_menu": [
+    { "label": "Shop Home", "url": "/shop" },
+    { "label": "Dashboard", "url": "/shop/dashboard" },
+    { "label": "Products", "url": "/shop/dashboard/products" },
+    { "label": "Products Category", "url": "/shop/dashboard/products-category" },
+    { "label": "Blog", "url": "/shop/dashboard/blog" }
+  ],
   "routes": {
     "publicRoutes": ["/shop", "/shop/about", "/shop/contact"],
     "authRoutes": ["/shop/signin", "/shop/signup"],
     "userRoutes": ["/shop/cart", "/shop/checkout", "/shop/orders", "/shop/payment"],
-    "adminRoute": "/shop/admin",
+    "adminRoute": "/shop/dashboard",
     "profileRoute": "/shop/profile",
     "userWhiteListRoutes": ["/shop/user", "/shop/user/profile"],
     "verifyRoute": "/shop/verify-email",

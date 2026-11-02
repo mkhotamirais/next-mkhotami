@@ -119,29 +119,24 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+.auth-guest,
+.auth-user,
+.auth-admin {
+  display: none;
+}
 
-html[data-auth="1"] .guest-only {
-  display: none;
-}
-html[data-auth="0"] .user-only {
-  display: none;
-}
-/* .avatar-cached {
-  position: absolute;
-  inset: 0;
+/* Tanpa atribut (misalnya JS mati) tampilkan tombol tamu */
+html:not([data-role]) .auth-guest,
+html[data-role="guest"] .auth-guest,
+html[data-role="USER"] .auth-user,
+html[data-role="ADMIN"] .auth-admin {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: var(--user-image, none);
-  background-size: cover;
-  background-position: center;
-} */
-.avatar-cached::before {
-  content: var(--user-initials, "");
 }
-html[data-avatar="1"] .avatar-generic {
-  display: none;
+
+.auth-name::before {
+  content: var(--auth-name, "");
 }
+
 @layer base {
   * {
     @apply border-border outline-ring/50 dark:text-muted-foreground;
@@ -162,9 +157,15 @@ html[data-avatar="1"] .avatar-generic {
   .body {
     @apply min-h-full flex flex-col w-full bg-zinc-50 dark:bg-zinc-900;
   }
+  .btn {
+    @apply border;
+  }
 }
 
 @layer components {
+  .header {
+    @apply sticky top-0 z-30 w-full bg-background;
+  }
   .container {
     @apply mx-auto w-full max-w-6xl px-4 md:px-8 h-full;
   }

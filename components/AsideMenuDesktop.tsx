@@ -8,8 +8,11 @@ import { usePathname } from "next/navigation";
 import { Menu } from "@/lib/types/main";
 import Logo from "./Logo";
 
-export default function AsideMenuDesktop({ menu, path }: { menu: Menu[]; path: string }) {
+export default function AsideMenuDesktop({ menu }: { menu: Menu[] }) {
   const pathname = usePathname();
+
+  const rootPath = pathname.split("/")[1];
+  const path = rootPath.replace("/", "");
 
   const linkClass = (active: boolean) =>
     cn(buttonVariants({ variant: active ? "secondary" : "ghost", size: "sm" }), "w-full justify-start");
@@ -23,15 +26,6 @@ export default function AsideMenuDesktop({ menu, path }: { menu: Menu[]; path: s
       <nav className="mt-4 min-h-0 flex-1 overflow-y-auto" aria-label={path.replace("/", "")}>
         <h2 className="mb-2 ml-2 font-semibold capitalize">{path.replace("/", "").replaceAll("-", " ")}</h2>
         <ul className="flex flex-col">
-          <li>
-            <Link
-              href={path}
-              className={linkClass(pathname === path)}
-              aria-current={pathname === path ? "page" : undefined}
-            >
-              Overview
-            </Link>
-          </li>
           {menu?.map((item) => (
             <li key={item.label}>
               <Link

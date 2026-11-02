@@ -3,50 +3,57 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import c from "@/lib/content/main.json";
-import Header from "@/components/projects/main/layout/Header";
-import MainFooter from "@/components/projects/main/layout/MainFooter";
+import { cn } from "cn";
 
 const menu = c.menu;
 
 export default function MainHome() {
   return (
-    <>
-      <Header />
-      <section className="container-sm space-y-6 py-8 h-screen flex-1">
-        <div className="flex justify-center text-center flex-col items-center py-4 space-y-4">
-          <Image
-            src="/images/profile-mkhotami-tengah-square.jpg"
-            alt="mkhotami"
-            width={100}
-            height={100}
-            className="rounded-full size-24 object-cover object-center mb-4"
-            priority
-          />
-          <div>
-            <h1 className="text-3xl font-semibold mb-2">Mkhotami</h1>
-            <p className="text-lg font-medium text-primary">Web Developer | Software Engineer</p>
-          </div>
-          <Link href="/portfolio" className={buttonVariants({ variant: "default", size: "lg" })}>
-            More about me
-          </Link>
-        </div>
-
-        <Separator />
+    <section className="container-sm space-y-6 py-8 h-screen flex-1">
+      <div className="flex justify-center text-center flex-col items-center py-4 space-y-4">
+        <Image
+          src="/images/profile-mkhotami-tengah-square.jpg"
+          alt="mkhotami"
+          width={100}
+          height={100}
+          className="rounded-full size-24 object-cover object-center mb-4"
+          priority
+        />
         <div>
-          <div className="mb-6">
-            <h2 className="h2 text-center">Checkout my portfolio</h2>
-            <Separator className={"max-w-24 mx-auto bg-black dark:bg-white min-h-0.5 rounded"} />
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {menu.map((item, i) => (
-              <Link href={item.url} key={i} className={buttonVariants({ variant: "outline" })}>
+          <h1 className="text-3xl font-semibold mb-2">Mkhotami</h1>
+          <p className="text-lg font-medium text-primary">Web Developer | Software Engineer</p>
+        </div>
+        <Link href="/portfolio" className={buttonVariants({ variant: "default", size: "lg" })}>
+          More about me
+        </Link>
+      </div>
+
+      <Separator />
+      <div>
+        <div className="mb-6">
+          <h2 className="h2 text-center">Checkout my portfolio</h2>
+          <Separator className={"max-w-24 mx-auto bg-black dark:bg-white min-h-0.5 rounded"} />
+        </div>
+        {/* <div className="grid grid-cols-6 gap-2">
+            {menu.map((item, i) => {
+              const spanClass = i < 3 ? "col-span-2" : "col-span-3";
+              return (
+                <Link href={item.url} key={item.url} className={cn(buttonVariants({ variant: "outline" }), spanClass)}>
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div> */}
+        <ul className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {menu.map((item, i) => (
+            <li key={i}>
+              <Link href={item.url} key={item.url} className={cn(buttonVariants({ variant: "outline" }), "w-full")}>
                 {item.label}
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <MainFooter container="container-sm" />
-    </>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }

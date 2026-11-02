@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
+import "./app.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
+import Header from "@/components/projects/main/layout/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,7 +36,10 @@ export default async function MainLayout({ children }: Props) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>
             <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
+            <Header />
+            <div className="red">halo</div>
             {children}
+            <Footer />
           </TooltipProvider>
         </ThemeProvider>
       </body>

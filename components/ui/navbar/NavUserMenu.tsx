@@ -3,10 +3,10 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogOut, User as UserIcon } from "lucide-react";
+import { LayoutDashboard, LogOut, User as UserIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Menu } from "@/lib/types/main";
-import { itemKey, matchesPath, navLinkClass, pickActive } from "@/lib/utils_nav";
+import { itemKey, isActive, navLinkClass, pickActive } from "@/lib/utils_nav";
 
 export type NavUser = {
   name?: string | null;
@@ -27,17 +27,6 @@ export function initials({ name, email }: NavUser) {
   return email?.trim()[0]?.toUpperCase() ?? "";
 }
 
-// function Avatar({ user }: { user: NavUser }) {
-//   if (user.image) {
-//     // <img> biasa agar tidak perlu mendaftarkan domain di next.config.
-//     // eslint-disable-next-line @next/next/no-img-element
-//     return <img src={user.image} alt="" referrerPolicy="no-referrer" className="size-full object-cover" />;
-//   }
-
-//   const text = initials(user);
-//   return text ? <span aria-hidden>{text}</span> : <UserIcon aria-hidden className="size-4" />;
-// }
-
 function Avatar({ user }: { user: NavUser }) {
   if (user.image) {
     // eslint-disable-next-line @next/next/no-img-element
@@ -56,6 +45,8 @@ function Avatar({ user }: { user: NavUser }) {
   );
 }
 
+export type QuickLink = { label: string; url: string };
+
 type Props = {
   user: NavUser;
   /** Isi dropdown. Tentukan sesuai peran di sisi pemanggil. */
@@ -65,6 +56,11 @@ type Props = {
   signOutLabel?: string;
   /** Label aksesibilitas untuk tombol profil. */
   label?: string;
+  /**
+   * Tombol link alternatif (mis. Dashboard). Kapan ia menggantikan dropdown
+   * ditentukan CSS lewat `html[data-role]` (lihat globals.css), supaya tidak berkedip.
+   */
+  quickLink?: QuickLink;
 };
 
 export default function NavUserMenu({
@@ -73,6 +69,7 @@ export default function NavUserMenu({
   onSignOut,
   signOutLabel = "Keluar",
   label = "Menu akun",
+  quickLink,
 }: Props) {
   const pathname = usePathname();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -86,6 +83,7 @@ export default function NavUserMenu({
   const close = () => setOpenedAt(null);
 
   const activeItem = pickActive(menu, pathname);
+  const quickActive = quickLink ? isActive(quickLink.url, pathname) : false;
 
   // Tutup dengan Escape atau klik/sentuh di luar. Aktif hanya saat terbuka.
   useEffect(() => {
@@ -111,77 +109,95 @@ export default function NavUserMenu({
   const hasIdentity = Boolean(user.name || user.email);
 
   return (
-    <div ref={rootRef} className="relative user-only">
-      <button
-        ref={triggerRef}
-        type="button"
-        aria-label={label}
-        aria-expanded={open}
-        aria-controls={panelId}
-        data-active={Boolean(activeItem)}
-        onClick={() => setOpenedAt(open ? null : pathname)}
-        className={cn(
-          "relative inline-flex size-9 items-center justify-center overflow-hidden rounded-full border bg-accent text-xs font-semibold transition-colors",
-          "outline-none hover:bg-accent/70 focus-visible:ring-2 focus-visible:ring-ring",
-          "aria-expanded:bg-accent/70 data-[active=true]:border-primary",
-        )}
-      >
-        <Avatar user={user} />
-      </button>
+    <>
+      <div ref={rootRef} className="relative user-only role-default">
+        <button
+          ref={triggerRef}
+          type="button"
+          aria-label={label}
+          aria-expanded={open}
+          aria-controls={panelId}
+          data-active={Boolean(activeItem)}
+          onClick={() => setOpenedAt(open ? null : pathname)}
+          className={cn(
+            "relative inline-flex size-9 items-center justify-center overflow-hidden rounded-full border bg-accent text-xs font-semibold transition-colors",
+            "outline-none hover:bg-accent/70 focus-visible:ring-2 focus-visible:ring-ring",
+            "aria-expanded:bg-accent/70 data-[active=true]:border-primary",
+          )}
+        >
+          <Avatar user={user} />
+        </button>
 
-      <div
-        id={panelId}
-        inert={!open}
-        className={cn(
-          "absolute right-0 top-full z-50 mt-1 w-56 origin-top-right rounded-lg border bg-popover p-1 text-popover-foreground",
-          "transition-[opacity,translate,scale,visibility] motion-reduce:transition-none",
-          open
-            ? "visible translate-y-0 scale-100 opacity-100 duration-200 ease-out"
-            : "invisible -translate-y-1 scale-95 opacity-0 duration-150 ease-in",
-        )}
-      >
-        {hasIdentity && (
-          <div className="px-2 py-1.5">
-            {user.name && <p className="truncate text-sm font-medium">{user.name}</p>}
-            {user.email && <p className="truncate text-xs text-muted-foreground">{user.email}</p>}
-          </div>
-        )}
+        <div
+          id={panelId}
+          inert={!open}
+          className={cn(
+            "absolute right-0 top-full z-50 mt-1 w-56 origin-top-right rounded-lg border bg-popover p-1 text-popover-foreground",
+            "transition-[opacity,translate,scale,visibility] motion-reduce:transition-none",
+            open
+              ? "visible translate-y-0 scale-100 opacity-100 duration-200 ease-out"
+              : "invisible -translate-y-1 scale-95 opacity-0 duration-150 ease-in",
+          )}
+        >
+          {hasIdentity && (
+            <div className="px-2 py-1.5">
+              {user.name && <p className="truncate text-sm font-medium">{user.name}</p>}
+              {user.email && <p className="truncate text-xs text-muted-foreground">{user.email}</p>}
+            </div>
+          )}
 
-        {menu.length > 0 && (
-          <>
-            {hasIdentity && <div role="separator" className="my-1 border-t" />}
-            <nav aria-label={label} className="flex flex-col">
-              {menu.map((item) => (
-                <Link
-                  key={itemKey(item)}
-                  href={item.url}
-                  onClick={close}
-                  aria-current={item === activeItem && matchesPath(item.url, pathname) ? "page" : undefined}
-                  data-active={item === activeItem}
-                  className={navLinkClass("w-full justify-start")}
+          {menu.length > 0 && (
+            <>
+              {hasIdentity && <div role="separator" className="my-1 border-t" />}
+              <nav aria-label={label} className="flex flex-col">
+                {menu.map((item) => (
+                  <Link
+                    key={itemKey(item)}
+                    href={item.url}
+                    onClick={close}
+                    aria-current={item === activeItem && isActive(item.url, pathname) ? "page" : undefined}
+                    data-active={item === activeItem}
+                    className={navLinkClass("w-full justify-start")}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </>
+          )}
+
+          {onSignOut && (
+            <>
+              {(hasIdentity || menu.length > 0) && <div role="separator" className="my-1 border-t" />}
+              <form action={onSignOut}>
+                <button
+                  type="submit"
+                  className={navLinkClass("w-full justify-start text-destructive hover:text-destructive")}
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </>
-        )}
-
-        {onSignOut && (
-          <>
-            {(hasIdentity || menu.length > 0) && <div role="separator" className="my-1 border-t" />}
-            <form action={onSignOut}>
-              <button
-                type="submit"
-                className={navLinkClass("w-full justify-start text-destructive hover:text-destructive")}
-              >
-                <LogOut aria-hidden className="size-4" />
-                {signOutLabel}
-              </button>
-            </form>
-          </>
-        )}
+                  <LogOut aria-hidden className="size-4" />
+                  {signOutLabel}
+                </button>
+              </form>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+
+      {quickLink && (
+        <Link
+          href={quickLink.url}
+          aria-current={quickActive ? "page" : undefined}
+          data-active={quickActive}
+          className={cn(
+            "user-only role-quick inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm font-medium transition-colors",
+            "outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring",
+            "data-[active=true]:bg-accent",
+          )}
+        >
+          <LayoutDashboard aria-hidden className="size-4" />
+          {quickLink.label}
+        </Link>
+      )}
+    </>
   );
 }

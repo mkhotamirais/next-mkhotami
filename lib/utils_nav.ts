@@ -14,15 +14,16 @@ export const navLinkClass = (extra?: string) =>
   );
 
 // Halaman aktif: cocok persis, atau pathname berada di bawah url tersebut.
-export function matchesPath(url: string, pathname: string) {
+export function isActive(url: string, pathname: string, rootPath?: string) {
+  if (!rootPath) rootPath = "/";
   if (!url.startsWith("/")) return false; // url kosong, "#", atau eksternal
-  if (url === "/") return pathname === "/";
+  if (url === rootPath) return pathname === rootPath;
   return pathname === url || pathname.startsWith(`${url}/`);
 }
 
 // Panjang url terpanjang yang cocok pada item ini atau turunannya. -1 = tidak aktif.
 function matchScore(item: Menu, pathname: string): number {
-  const own = matchesPath(item.url, pathname) ? item.url.length : -1;
+  const own = isActive(item.url, pathname) ? item.url.length : -1;
   const child = Math.max(-1, ...(item.sub_menu?.map((c) => matchScore(c, pathname)) ?? []));
   return Math.max(own, child);
 }
@@ -39,4 +40,11 @@ export function pickActive(items: Menu[] | undefined, pathname: string): Menu | 
     }
   }
   return best;
+}
+
+export function hasActiveChild(item: Menu, pathname: string, rootPath: string): boolean {
+  return (
+    item.sub_menu?.some((sub) => isActive(sub.url, pathname, rootPath) || hasActiveChild(sub, pathname, rootPath)) ??
+    false
+  );
 }

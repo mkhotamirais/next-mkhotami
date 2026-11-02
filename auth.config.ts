@@ -39,8 +39,8 @@ export default {
         if (!compareSync(password, user.password)) return null;
 
         // Jangan kembalikan hash password ke bagian lain Auth.js
-        const { password: _password, accounts: _accounts, ...safeUser } = user;
-        return safeUser;
+        // const { password: _password, accounts: _accounts, ...safeUser } = user;
+        return user;
       },
     }),
   ],

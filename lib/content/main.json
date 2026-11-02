@@ -1,9 +1,14 @@
 {
   "menu": [
     { "label": "Shop", "url": "/shop" },
+    { "label": "Appwrite", "url": "/appwrite" },
+    { "label": "Firebase", "url": "/firebase" },
+    { "label": "Supabase", "url": "/supabase" },
     { "label": "Components", "url": "/components" },
     { "label": "Simple Apps", "url": "/simple-apps" },
     { "label": "Public Api", "url": "/public-api" },
+    { "label": "Accessibility", "url": "/accessibility" },
+    { "label": "Motion", "url": "/motion" },
     { "label": "Lang", "url": "/en/lang" }
   ]
 }

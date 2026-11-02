@@ -1,0 +1,6 @@
+{
+  "menu": [
+    { "label": "Home", "url": "/firebase" },
+    { "label": "About", "url": "/firebase/about" }
+  ]
+}

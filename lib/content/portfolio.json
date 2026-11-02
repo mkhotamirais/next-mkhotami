@@ -14,7 +14,10 @@
           "url": "/",
           "sub_menu": [
             { "label": "Shop", "url": "/shop" },
-            { "label": "Lang", "url": "/en/lang" }
+            { "label": "Lang", "url": "/en/lang" },
+            { "label": "Appwrite", "url": "/appwrite" },
+            { "label": "Firebase", "url": "/firebase" },
+            { "label": "Supabase", "url": "/supabase" }
           ]
         },
         {
@@ -25,7 +28,8 @@
             { "label": "Navbar", "url": "/components/navbar" },
             { "label": "Accordion", "url": "/components/accordion" },
             { "label": "Form Inputs", "url": "/components/form-inputs" },
-            { "label": "Typescript", "url": "/components/typescript" }
+            { "label": "Typescript", "url": "/components/typescript" },
+            { "label": "Dropdown", "url": "/components/dropdown" }
           ]
         },
         {
@@ -46,15 +50,6 @@
             { "label": "Dummyjson", "url": "/public-api/dummyjson" },
             { "label": "JSON Placeholder", "url": "/public-api/jp" },
             { "label": "Youtube", "url": "/public-api/youtube" }
-          ]
-        },
-        {
-          "label": "BAAS",
-          "url": "/baas",
-          "sub_menu": [
-            { "label": "Appwrite", "url": "/baas/appwrite" },
-            { "label": "Firebase", "url": "/baas/firebase" },
-            { "label": "Supabase", "url": "/baas/supabase" }
           ]
         }
       ]

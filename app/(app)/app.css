@@ -1,0 +1,5 @@
+@reference "../globals.css";
+
+.red {
+  @apply text-secondary;
+}

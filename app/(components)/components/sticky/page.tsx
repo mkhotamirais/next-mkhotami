@@ -2,7 +2,6 @@ export default function Sticky() {
   return (
     <div className="">
       <div className="w-2/3">
-        <h1 className="h1">Sticky</h1>
         <div className="mb-4">
           <h2 className="h2">Sticky Model 1</h2>
           <div className="relative h-64 w-full border overflow-y-scroll">

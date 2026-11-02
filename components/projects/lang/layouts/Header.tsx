@@ -1,6 +1,7 @@
 import Logo from "@/components/Logo";
 import { NavMobileLangBtn, NavMobileLangContent } from "./NavMobileLang";
 import NavDesktopLang from "./NavDesktopLang";
+import SwitchLangBtn from "../SwitchLangBtn";
 
 export default function Header() {
   return (
@@ -9,7 +10,10 @@ export default function Header() {
         <Logo />
         <div>
           <NavDesktopLang />
-          <NavMobileLangBtn />
+          <div className="flex items-center gap-2">
+            <SwitchLangBtn className="flex md:hidden" />
+            <NavMobileLangBtn />
+          </div>
         </div>
       </div>
       <NavMobileLangContent />

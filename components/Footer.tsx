@@ -26,7 +26,7 @@ export default function Footer({ container = "container" }: { container?: string
           <Logo />
           <ThemeToggle />
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 mb-8 space-y-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 mb-8 space-y-6">
           <nav>
             <h2 className="font-semibold mb-2">About Me</h2>
             <ul>

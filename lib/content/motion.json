@@ -1,0 +1,6 @@
+{
+  "menu": [
+    { "label": "Home", "url": "/motion" },
+    { "label": "About", "url": "/motion/about" }
+  ]
+}

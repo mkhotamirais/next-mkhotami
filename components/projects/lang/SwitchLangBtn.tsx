@@ -22,7 +22,7 @@ const LANGUAGES: Record<string, { label: string; short: string }> = {
   ar: { label: "العربية", short: "AR" },
 };
 
-export default function SwitchLangBtn() {
+export default function SwitchLangBtn({ className }: { className?: string }) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -44,7 +44,7 @@ export default function SwitchLangBtn() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-2")}
+        className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-2", className)}
         disabled={isPending}
         aria-label="Pilih bahasa"
       >

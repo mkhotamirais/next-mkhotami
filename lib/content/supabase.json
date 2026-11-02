@@ -1,0 +1,6 @@
+{
+  "menu": [
+    { "label": "Home", "url": "/supabase" },
+    { "label": "About", "url": "/supabase/about" }
+  ]
+}

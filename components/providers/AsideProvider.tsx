@@ -21,8 +21,8 @@ export default function AsideProvider({ children, menu }: Props) {
         <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
         <AsideMenuMobile menu={menu} />
         <div className="container flex flex-row gap-4 items-start my-4 md:my-0">
-          <AsideMenuDesktop menu={menu} path="/public-api" />
-          <div className="flex-1 p-0 md:p-4">
+          <AsideMenuDesktop menu={menu} />
+          <div className="flex-1 p-0 md:p-4 sticky">
             <div className="space-y-4">
               <RouteTitle />
               <Breadcrumb />

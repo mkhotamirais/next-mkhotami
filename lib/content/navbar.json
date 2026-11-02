@@ -1,0 +1,39 @@
+{
+  "single_level_menu": [
+    { "label": "Home", "url": "/components/navbar" },
+    { "label": "About", "url": "/components/navbar/about" }
+  ],
+  "two_level_menu": [
+    { "label": "Home", "url": "/components/navbar" },
+    { "label": "About", "url": "/components/navbar/about" },
+    {
+      "label": "Contact",
+      "url": "/components/navbar/contact",
+      "sub_menu": [
+        { "label": "Contact1", "url": "/components/navbar/contact/contact1" },
+        { "label": "Contact2", "url": "/components/navbar/contact/contact2" }
+      ]
+    }
+  ],
+  "three_level_menu": [
+    { "label": "Home", "url": "/components/navbar" },
+    { "label": "About", "url": "/components/navbar/about" },
+    {
+      "label": "Contact",
+      "url": "/components/navbar/contact",
+      "sub_menu": [
+        { "label": "Contact1", "url": "/components/navbar/contact/contact1" },
+        { "label": "Contact2", "url": "/components/navbar/contact/contact2" },
+        {
+          "label": "Contact3",
+          "url": "/components/navbar/contact/contact3",
+          "sub_menu_2": [
+            { "label": "Contact3.1", "url": "/components/navbar/contact/contact2/contact3-1" },
+            { "label": "Contact3.2", "url": "/components/navbar/contact/contact2/contact3-2" },
+            { "label": "Contact3.3", "url": "/components/navbar/contact/contact2/contact3-3" }
+          ]
+        }
+      ]
+    }
+  ]
+}

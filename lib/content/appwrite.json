@@ -1,0 +1,14 @@
+{
+  "menu": [
+    { "label": "Home", "url": "/appwrite" },
+    { "label": "About", "url": "/appwrite/about" }
+  ],
+  "auth_menu": [
+    { "label": "Sign In", "url": "/appwrite/signin" },
+    { "label": "Sign Up", "url": "/appwrite/signup" }
+  ],
+  "user_menu": [
+    { "label": "Orders", "url": "/appwrite/orders" },
+    { "label": "Profile", "url": "/appwrite/profile" }
+  ]
+}

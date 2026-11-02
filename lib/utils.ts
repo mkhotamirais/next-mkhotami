@@ -49,3 +49,6 @@ export const capitalize = (str: string) => {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
+
+// Cocok untuk "/shop" dan "/shop/...", tapi tidak untuk "/shopping"
+export const inPath = (pathname: string, base: string) => pathname === base || pathname.startsWith(`${base}/`);

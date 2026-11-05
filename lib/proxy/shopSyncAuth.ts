@@ -1,9 +1,12 @@
 import type { NextRequest, NextResponse } from "next/server";
 
 const MAX_AGE = 60 * 60 * 24 * 30; // samakan dengan umur session JWT
-const COOKIES = ["auth_hint", "auth_role", "auth_name"] as const;
+const COOKIES = ["auth_hint", "auth_role", "auth_name", "auth_image", "auth_halo"] as const;
+const MAX_IMAGE_LENGTH = 500;
 
-export type ShopHintUser = { role?: string | null; name?: string | null; email?: string | null } | undefined;
+export type ShopHintUser =
+  | { role?: string | null; name?: string | null; email?: string | null; image?: string | null; halo?: string | null }
+  | undefined;
 
 // Penanda tampilan saja (bukan keamanan). Sengaja tidak httpOnly
 // supaya script di <head> bisa membacanya sebelum cat pertama.
@@ -17,13 +20,18 @@ export function shopSyncAuth(req: NextRequest, res: NextResponse, user: ShopHint
   };
 
   const name = (user?.name ?? user?.email ?? "").slice(0, 60);
+  // const image =
+  //   user?.image && user.image.startsWith("http://") && user.image.length <= MAX_IMAGE_LENGTH ? user.image : null;
+
   const values: Record<(typeof COOKIES)[number], string | null> = user
     ? {
         auth_hint: "1",
         auth_role: user.role === "ADMIN" ? "ADMIN" : "USER",
         auth_name: name || null,
+        auth_image: user?.image || null,
+        auth_halo: "halo",
       }
-    : { auth_hint: null, auth_role: null, auth_name: null };
+    : { auth_hint: null, auth_role: null, auth_name: null, auth_image: null, auth_halo: null };
 
   // Tulis atau hapus hanya kalau nilainya berubah
   for (const key of COOKIES) {

@@ -56,6 +56,7 @@ export default {
         token.phone = user.phone;
         token.emailVerified = user.emailVerified;
         token.pendingEmail = user.pendingEmail;
+        token.image = user.image;
         return token;
       }
 
@@ -70,6 +71,7 @@ export default {
             phone: true,
             emailVerified: true,
             pendingEmail: true,
+            image: true,
           },
         });
         if (latest) {
@@ -79,6 +81,7 @@ export default {
           token.phone = latest.phone;
           token.emailVerified = latest.emailVerified;
           token.pendingEmail = latest.pendingEmail;
+          token.image = latest.image;
         }
       }
 
@@ -93,6 +96,7 @@ export default {
       session.user.phone = token.phone;
       session.user.pendingEmail = token.pendingEmail;
       session.user.emailVerified = token.emailVerified ? new Date(token.emailVerified as unknown as string) : null;
+      session.user.image = token.image as string | null;
       return session;
     },
   },

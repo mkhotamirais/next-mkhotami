@@ -10,20 +10,20 @@ import RouteTitle from "../RouteTitle";
 import Footer from "../Footer";
 
 type Props = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  listChildren?: React.ReactNode;
   menu: Menu[];
   isLogin?: boolean;
-  logoutButton?: React.ReactNode;
 };
 
-export default function AsideProvider({ children, menu, isLogin = false, logoutButton }: Props) {
+export default function AsideProvider({ children, listChildren, menu }: Props) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       <TooltipProvider>
         <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
         <AsideMenuMobile menu={menu} />
         <div className="container flex flex-row gap-4 items-start my-4 md:my-0">
-          <AsideMenuDesktop menu={menu} isLogin={isLogin} logoutButton={logoutButton} />
+          <AsideMenuDesktop menu={menu}>{listChildren}</AsideMenuDesktop>
           <div className="flex-1 p-0 md:p-4 sticky">
             <div className="space-y-4">
               <RouteTitle />

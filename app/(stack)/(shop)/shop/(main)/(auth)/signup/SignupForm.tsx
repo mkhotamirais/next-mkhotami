@@ -8,28 +8,26 @@ import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { registerSchema } from "@/lib/schemas/auth";
+import { signupSchema } from "@/lib/schemas/auth";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
-type inferSchema = z.infer<typeof registerSchema>;
+type inferSchema = z.infer<typeof signupSchema>;
 
 export default function SignupForm() {
   const form = useForm<inferSchema>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(signupSchema),
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   });
   const pending = form.formState.isSubmitting;
-  const router = useRouter();
 
   const [showPass, setShowPass] = useState(false);
   const [showConfPass, setShowConfPass] = useState(false);
 
   const onSubmit = async (data: inferSchema) => {
-    const res = await fetch("/shop/api/account/signup", { method: "POST", body: JSON.stringify(data) });
+    const res = await fetch("/shop/api/user-auth/signup", { method: "POST", body: JSON.stringify(data) });
     const result = await res.json();
 
     if (!result.ok) {
@@ -40,7 +38,7 @@ export default function SignupForm() {
     form.reset();
 
     await signIn("credentials", { email: data.email, password: data.password, redirect: false });
-    router.refresh();
+    window.location.assign(new URL("/shop/redirect", window.location.origin).href);
   };
 
   return (

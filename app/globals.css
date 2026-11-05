@@ -119,23 +119,6 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
-.auth-guest,
-.auth-user,
-.auth-admin {
-  display: none;
-}
-
-/* Tanpa atribut (misalnya JS mati) tampilkan tombol tamu */
-html:not([data-role]) .auth-guest,
-html[data-role="guest"] .auth-guest,
-html[data-role="USER"] .auth-user,
-html[data-role="ADMIN"] .auth-admin {
-  display: flex;
-}
-
-.auth-name::before {
-  content: var(--auth-name, "");
-}
 
 @layer base {
   * {

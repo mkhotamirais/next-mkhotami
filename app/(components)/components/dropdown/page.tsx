@@ -7,7 +7,6 @@ import DropdownScreenDetection from "./DropdownScreenDetection";
 export default function Dropdown() {
   return (
     <div>
-      <div>halo</div>
       <DropdownPanel />
       <DropdownWithState />
       <DropdownMultiple />

@@ -9,8 +9,9 @@
     { "label": "Sign Up", "url": "/shop/signup" }
   ],
   "user_menu": [
-    { "label": "Orders", "url": "/shop/orders" },
-    { "label": "Profile", "url": "/shop/profile" }
+    { "label": "Profile", "url": "/shop/profile" },
+    { "label": "Address", "url": "/shop/address" },
+    { "label": "Orders", "url": "/shop/orders" }
   ],
   "admin_menu": [
     { "label": "Shop Home", "url": "/shop" },

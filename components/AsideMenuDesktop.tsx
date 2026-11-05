@@ -9,12 +9,11 @@ import { Menu } from "@/lib/types/main";
 import Logo from "./Logo";
 
 type Props = {
-  isLogin?: boolean;
-  logoutButton?: React.ReactNode;
   menu: Menu[];
+  children?: React.ReactNode;
 };
 
-export default function AsideMenuDesktop({ isLogin = false, logoutButton, menu }: Props) {
+export default function AsideMenuDesktop({ children, menu }: Props) {
   const pathname = usePathname();
 
   const rootPath = pathname.split("/")[1];
@@ -43,7 +42,7 @@ export default function AsideMenuDesktop({ isLogin = false, logoutButton, menu }
               </Link>
             </li>
           ))}
-          {isLogin && <li className="mt-2">{logoutButton}</li>}
+          {children}
         </ul>
       </nav>
     </aside>

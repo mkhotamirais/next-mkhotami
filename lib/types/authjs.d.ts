@@ -12,6 +12,7 @@ declare module "next-auth" {
     phone?: string | null;
     emailVerified?: Date | null;
     pendingEmail?: string | null;
+    image?: string | null;
   }
 }
 
@@ -22,5 +23,6 @@ declare module "next-auth/jwt" {
     phone?: string | null;
     emailVerified?: Dae | null;
     pendingEmail?: string | null;
+    image?: string | null;
   }
 }

@@ -7,16 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { loginSchema } from "@/lib/schemas/auth";
+import { signinSchema } from "@/lib/schemas/auth";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Alert from "@/components/ui/custom/Alert";
 
-type inferSchema = z.infer<typeof loginSchema>;
+type inferSchema = z.infer<typeof signinSchema>;
 
 export default function SigninForm() {
   const [showPass, setShowPass] = useState(false);
@@ -26,10 +25,8 @@ export default function SigninForm() {
   // Menggunakan state untuk menyimpan ID interval, bukan useRef
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
-  const router = useRouter();
-
   const form = useForm<inferSchema>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(signinSchema),
     defaultValues: { email: "", password: "" },
   });
 
@@ -100,8 +97,6 @@ export default function SigninForm() {
 
     setAlert({ type: "success", message: "Login successful! Redirecting..." });
     window.location.assign(new URL("/shop/redirect", window.location.origin).href);
-    // router.push("/shop/redirect");
-    // router.refresh();
   };
 
   return (

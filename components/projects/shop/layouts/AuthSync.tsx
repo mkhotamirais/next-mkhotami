@@ -2,41 +2,46 @@
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 
-const MAX_AGE = 60 * 60 * 24 * 30; // samakan dengan umur auth_hint di proxy.ts
+const initialsOf = (text: string) =>
+  text
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => Array.from(w)[0])
+    .join("")
+    .toUpperCase();
 
 export function AuthSync() {
   const { data: session, status } = useSession();
+  console.log("halo");
 
   useEffect(() => {
     if (status === "loading") return;
 
-    const user = session?.user;
-    const isLoggedIn = status === "authenticated" && !!user;
     const root = document.documentElement;
-    const hint = /(^|; )auth_hint=1/.test(document.cookie);
+    const set = (name: string, value: string | null) =>
+      value ? root.style.setProperty(name, value) : root.style.removeProperty(name);
 
-    // Koreksi cadangan: hanya menulis kalau petunjuk berbeda dari session asli
-    if (isLoggedIn !== hint) {
-      document.cookie = isLoggedIn
-        ? `auth_hint=1; path=/; max-age=${MAX_AGE}; SameSite=Lax`
-        : "auth_hint=; path=/; max-age=0; SameSite=Lax";
+    const user = session?.user;
+    // console.log("user", user);
+    // console.log("halo");
+
+    if (status === "authenticated" && user) {
+      const label = user.name || user.email || "";
+      const role = user.role === "ADMIN" ? "ADMIN" : "USER";
+
+      set("--auth-name", label ? JSON.stringify(label) : null);
+      set("--auth-initials", label ? JSON.stringify(initialsOf(label)) : null);
+      // Foto hanya diperbarui kalau ada, tidak dihapus di sini, supaya tidak berkedip
+      if (user.image) set("--auth-image", `url(${JSON.stringify(user.image)})`);
+
+      if (root.dataset.role !== role) root.dataset.role = role;
+    } else {
+      set("--auth-name", null);
+      set("--auth-initials", null);
+      set("--auth-image", null);
+      if (root.dataset.role !== "guest") root.dataset.role = "guest";
     }
-
-    const role = isLoggedIn ? (user.role === "ADMIN" ? "ADMIN" : "USER") : "guest";
-    const name = isLoggedIn ? (user.name ?? user.email ?? "") : "";
-
-    try {
-      if (isLoggedIn) {
-        localStorage.setItem("auth_user", JSON.stringify({ name, role }));
-      } else {
-        localStorage.removeItem("auth_user");
-      }
-    } catch {}
-
-    if (name) root.style.setProperty("--auth-name", JSON.stringify(name));
-    else root.style.removeProperty("--auth-name");
-
-    if (root.dataset.role !== role) root.dataset.role = role;
   }, [session, status]);
 
   return null;

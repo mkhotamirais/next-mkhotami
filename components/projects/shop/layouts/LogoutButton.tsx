@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import { cn } from "cn";
 
 type Props = {
   className?: string;
@@ -28,7 +29,14 @@ export default function LogoutButton({ className, variant = "ghost" }: Props) {
   }
 
   return (
-    <Button type="button" variant={variant} size="sm" onClick={handleLogout} disabled={pending} className={className}>
+    <Button
+      type="button"
+      variant={variant}
+      size="sm"
+      onClick={handleLogout}
+      disabled={pending}
+      className={cn(className, "auth-admin", { "pointer-events-none": pending })}
+    >
       <LogOut className="mr-0 size-3.5 text-destructive!" />
       Logout
     </Button>

@@ -8,6 +8,7 @@ import {
   NavMobileSingleLevelContent,
 } from "@/components/ui/navbar/single-level/NavMobileSingleLevel";
 import UserAuth from "./UserAuth";
+import SearchContent from "./SearchContent";
 
 const menu = c.menu;
 
@@ -19,8 +20,8 @@ export default function Header() {
         <Logo />
         <div className="flex items-center gap-4">
           <NavDesktopSingleLevel menu={menu} rootPath="/shop" />
+          <SearchContent />
           <UserAuth />
-
           <NavMobileSingleLevelBtn />
         </div>
       </div>

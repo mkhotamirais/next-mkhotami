@@ -1,0 +1,33 @@
+@reference "../../globals.css";
+
+.auth-guest,
+.auth-member,
+.auth-user,
+.auth-admin {
+  display: none;
+}
+
+html:not([data-role]) .auth-guest,
+html[data-role="guest"] .auth-guest,
+html:is([data-role="USER"], [data-role="ADMIN"]) .auth-member,
+html[data-role="USER"] .auth-user,
+html[data-role="ADMIN"] .auth-admin {
+  display: flex;
+}
+
+.auth-name::before {
+  content: var(--auth-name, "");
+}
+
+/* Avatar: inisial di bawah, foto di atasnya. Keduanya dari CSS variable. */
+.auth-avatar::before {
+  content: var(--auth-initials, "");
+}
+.auth-avatar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--auth-image, none);
+  background-size: cover;
+  background-position: center;
+}

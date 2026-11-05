@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "cn";
-import React from "react";
 
 export default function DropdownPanel() {
   return (

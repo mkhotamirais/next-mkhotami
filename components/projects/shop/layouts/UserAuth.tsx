@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
-import LogoutButton from "./LogoutButton";
+import { buttonVariants } from "@/components/ui/button";
+import UserMenuDesktop from "./UserMenuDesktop";
 // import { signOut } from "@/auth";
 
 // const keluar = async () => {
@@ -18,21 +18,18 @@ export default function UserAuth() {
       </Link>
 
       {/* Login, role user */}
-      <div className="auth-user items-center gap-2">
+      {/* <div className="auth-user items-center gap-2">
         <span className="text-sm">
           Hi, <span className="auth-name font-medium" />
         </span>
         <LogoutButton />
-        {/* <Button onClick={keluar}>Logout juga</Button> */}
-      </div>
+      </div> */}
+      <UserMenuDesktop />
 
       {/* Login, role admin */}
-      <div className="auth-admin items-center gap-2">
-        <Link href="/shop/dashboard" className={cn(buttonVariants({ variant: "default" }))}>
-          Dashboard
-        </Link>
-        {/* <LogoutButton /> */}
-      </div>
+      <Link href="/shop/dashboard" className={cn(buttonVariants({ variant: "default" }), "auth-admin")}>
+        Dashboard
+      </Link>
     </div>
   );
 }

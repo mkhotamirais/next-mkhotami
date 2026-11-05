@@ -2,7 +2,6 @@ import Logo from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-
 import c from "@/lib/content/portfolio.json";
 import { cn } from "cn";
 import Link from "next/link";

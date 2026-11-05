@@ -1,13 +1,14 @@
 // import { baseUrl } from "@/lib/constants";
+import { sendEmailVerification } from "@/actions/shop/user-auth";
 import prisma from "@/lib/prisma";
-import { registerSchema } from "@/lib/schemas/auth";
+import { signupSchema } from "@/lib/schemas/auth";
 import { hashSync } from "bcrypt-ts";
 import * as z from "zod";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const valdatedFields = registerSchema.safeParse(body);
+    const valdatedFields = signupSchema.safeParse(body);
 
     if (!valdatedFields.success) {
       return Response.json(
@@ -25,7 +26,9 @@ export async function POST(req: Request) {
 
     const hashedPassword = hashSync(password, 10);
     try {
-      await prisma.user.create({ data: { name, email, password: hashedPassword, emailVerified: null } });
+      const newUser = { name, email, password: hashedPassword, emailVerified: null };
+      const user = await prisma.user.create({ data: newUser });
+      await sendEmailVerification(newUser.email, user.id);
     } catch (error) {
       console.log("error creating user", error);
     }
@@ -36,7 +39,7 @@ export async function POST(req: Request) {
     // //   body: JSON.stringify({ email, userId: user.id, callbackUrl: "/user" }),
     // // });
 
-    return Response.json({ ok: true, message: "Registration successful." }, { status: 201 });
+    return Response.json({ ok: true, message: "Registration successful, please check your email." }, { status: 201 });
   } catch (error) {
     console.log("error", error);
   }

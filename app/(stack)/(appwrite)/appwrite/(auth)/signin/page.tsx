@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/appwrite/useAuth";
 import AuthForm from "./AuthForm";
 import Link from "next/link";
+import OauthGithub from "../OauthGithub";
 
 export default function LoginPage() {
   const { login, register } = useAuth();
@@ -34,6 +35,7 @@ export default function LoginPage() {
     <div className="u-max-width-650" style={{ margin: "0 auto" }}>
       <section className="card u-margin-32">
         <h2 className="eyebrow-heading-2">Login/Register</h2>
+        <OauthGithub />
         <AuthForm
           handleSubmit={isSignUp ? handleRegistration : handleLogin}
           submitType={isSignUp ? "Sign Up" : "Log In"}

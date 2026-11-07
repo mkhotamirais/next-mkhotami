@@ -11,5 +11,11 @@ export default function SignoutButton() {
   if (!isLoggedIn) {
     return null;
   }
-  return <Button onClick={logout}>SignoutButton</Button>;
+
+  return (
+    <div>
+      {current?.email}
+      <Button onClick={logout}>SignoutButton</Button>;
+    </div>
+  );
 }

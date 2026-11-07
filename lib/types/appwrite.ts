@@ -1,3 +1,7 @@
-import { account } from "../appwrite";
+import { Models } from "appwrite";
 
-export type AppUser = Awaited<ReturnType<typeof account.get>>;
+export type UserPrefs = Models.Preferences & {
+  avatar?: string | null;
+};
+
+export type User = Models.User<UserPrefs>;

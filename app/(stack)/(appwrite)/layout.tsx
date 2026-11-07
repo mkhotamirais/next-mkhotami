@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
 import Footer from "@/components/Footer";
 import Header from "@/components/projects/appwrite/layouts/Header";
+import { appwriteScript } from "@/lib/scripts/appwrite-script";
 // import { createNextServerHelpers } from "@appwrite.io/react/server/next";
 // import { appwrite } from "@/lib/constants/appwrite";
 
@@ -36,6 +37,9 @@ export default async function MainLayout({ children }: Props) {
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: appwriteScript }} />
+      </head>
       <body className="body" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>

@@ -33,15 +33,15 @@ export default async function MainLayout({ children }: Props) {
       data-scroll-behavior="smooth"
     >
       <body className="body" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        cari
+        {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>
             <Toaster position="top-center" richColors swipeDirections={["left", "right", "top"]} />
             <Header />
-            <div className="red">halo</div>
             {children}
             <Footer />
           </TooltipProvider>
-        </ThemeProvider>
+        </ThemeProvider> */}
       </body>
     </html>
   );

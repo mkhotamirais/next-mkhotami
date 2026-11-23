@@ -5,24 +5,23 @@ import React from "react";
 
 type Props = {
   className?: string;
-  textWhite?: boolean;
 };
 
-export default function Logo({ className, textWhite = false }: Props) {
+export default function Logo({ className }: Props) {
   return (
-    <Link href="/" className={cn("flex items-center gap-1", className)}>
+    <Link href="/" className={cn("flex items-center gap-1 w-auto h-14", className)}>
       <Image
-        src="/images/logos/logo-mkhotami.png"
+        src="/images/logos/logo-ota-icon-text-square.png"
         alt="MKHotami Logo"
-        width={50}
-        height={50}
+        width={200}
+        height={200}
         priority
-        className={"size-10"}
+        className={"w-full h-full"}
       />
-      <div className={cn("flex flex-col", textWhite && "*:text-gray-300")}>
+      {/* <div className={cn("flex flex-col", textWhite && "*:text-gray-300")}>
         <span className="font-semibold text-sm">MKHOTAMI</span>
         <span className="text-[10px] tracking-tight font-light">WEB DEVELOPER</span>
-      </div>
+      </div> */}
     </Link>
   );
 }
